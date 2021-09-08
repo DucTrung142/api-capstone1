@@ -15,7 +15,7 @@ db.connect();
 app.use(express.json());
 
 app.get('/', (req, res) => {
-  res.send('hello from node');
+  res.send('Khoa ngu');
 });
 
 //user router
