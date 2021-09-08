@@ -5,8 +5,7 @@ const jwt = require('jsonwebtoken');
 const { registerValidation, loginValidation } = require('../../validation');
 
 //post Model
-const Users = require('../../app/model/users');
-const { use } = require('bcrypt/promises');
+const users = require('../../app/model/users');
 
 //REGISTER
 router.post('/register', async (req, res) => {
@@ -16,14 +15,14 @@ router.post('/register', async (req, res) => {
   if (error) return res.status(400).send(error.details[0].message);
 
   //checking if the user is already in the database
-  const userExist = await Users.findOne({ username: req.body.username });
+  const userExist = await users.findOne({ username: req.body.username });
   if (userExist) return res.status(400).send('username already exists');
 
   //hash password
   const salt = await bcrypt.genSalt(10);
   const hashPassword = await bcrypt.hash(req.body.password, salt);
 
-  const newUser = new Users({
+  const newUser = new users({
     username: req.body.username,
     password: hashPassword,
     fullname: req.body.fullname,
@@ -58,7 +57,7 @@ router.post('/login', async (req, res) => {
   if (error) return res.status(400).send(error.details[0].message);
 
   //checking if the user exists
-  const user = await Users.findOne({ username: req.body.username });
+  const user = await users.findOne({ username: req.body.username });
   if (!user) return res.status(400).send('username is not found');
 
   //password if correct
