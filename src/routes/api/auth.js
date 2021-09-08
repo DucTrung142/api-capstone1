@@ -5,24 +5,23 @@ const jwt = require('jsonwebtoken');
 const { registerValidation, loginValidation } = require('../../validation');
 
 //post Model
-const users = require('../../app/model/users');
+const User = require('../../app/model/users');
 
 //REGISTER
 router.post('/register', async (req, res) => {
-  console.log(req.body);
   // Validation the data before
   const { error } = registerValidation.validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
   //checking if the user is already in the database
-  const userExist = await users.findOne({ username: req.body.username });
+  const userExist = await User.findOne({ username: req.body.username });
   if (userExist) return res.status(400).send('username already exists');
 
   //hash password
   const salt = await bcrypt.genSalt(10);
   const hashPassword = await bcrypt.hash(req.body.password, salt);
 
-  const newUser = new users({
+  const newUser = new User({
     username: req.body.username,
     password: hashPassword,
     fullname: req.body.fullname,
@@ -36,7 +35,7 @@ router.post('/register', async (req, res) => {
     const token = jwt.sign({ _id: savedUser._id }, process.env.TOKEN_SECRET);
     res.header('auth-token', token).send({
       jwt: token,
-      Users: {
+      User: {
         id: savedUser._id,
         username: savedUser.username,
         fullname: savedUser.fullname,
@@ -57,7 +56,7 @@ router.post('/login', async (req, res) => {
   if (error) return res.status(400).send(error.details[0].message);
 
   //checking if the user exists
-  const user = await users.findOne({ username: req.body.username });
+  const user = await User.findOne({ username: req.body.username });
   if (!user) return res.status(400).send('username is not found');
 
   //password if correct
