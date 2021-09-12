@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 async function connect() {
   try {
-    await mongoose.connect('mongodb://localhost:27017/cap1_infomation_users', {
+    await mongoose.connect(process.env.DB_CONNECT, {
       useNewUrlParser: true,
       useUniFiedTopology: true,
     });
