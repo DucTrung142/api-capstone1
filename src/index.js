@@ -2,6 +2,7 @@ require('dotenv').config();
 
 const db = require('./config/db');
 const express = require('express');
+const cors = require('cors');
 
 const app = express();
 
@@ -14,13 +15,15 @@ db.connect();
 //bodyParser Middelware
 app.use(express.json());
 
-app.get('/', (req, res) => {
-  res.send('Khoa ngu');
-});
+app.use(cors);
+
+// app.get('/', (req, res) => {
+//   res.send('Khoa ngu');
+// });
 
 //user router
 app.use('/auth', authRouter);
 
-const PORT = process.env.PORT || 3002;
+const PORT = process.env.PORT || 2000;
 
 app.listen(PORT, () => console.log(`Sever run at http://localhost:${PORT}`));
