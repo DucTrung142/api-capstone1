@@ -48,7 +48,10 @@ router.post('/register', async (req, res) => {
     res.status(400).send(error);
   }
 });
-
+//xog chua gui len git lai thu tui tẽ tni thu
+// Cái thông báo password is required nằm ở đâu á // Okie gửi lên git lại thử
+// Tui đang test trả dạng file json á/ Chứ send nó chạy vòng vòng ko biet Ý là tui sửa rồi á
+// Chừ ông chạy trên git gì đó lại đi
 //LOGIN
 router.post('/login', async (req, res) => {
   //validation the data before
@@ -57,11 +60,17 @@ router.post('/login', async (req, res) => {
 
   //checking if the user exists
   const user = await User.findOne({ username: req.body.username });
-  if (!user) return res.status(400).send('username is not found');
+  if (!user)
+    //return res.status(400).send('username is not found');
+    return res
+      .status(400)
+      .json({ sucess: false, message: 'username is not found' });
 
   //password if correct
   const validPassword = await bcrypt.compare(req.body.password, user.password);
-  if (!validPassword) return res.status(400).send('Invalid password');
+  if (!validPassword)
+    //return res.status(400).send('Invalid password');
+    res.status(400).json({ sucess: false, message: 'username is not found' });
   console.log('connect');
   //create and assign a token
   const token = jwt.sign({ _id }, process.env.TOKEN_SECRET);
