@@ -48,15 +48,12 @@ router.post('/register', async (req, res) => {
     res.status(400).send(error);
   }
 });
-//xog chua gui len git lai thu tui tẽ tni thu
-// Cái thông báo password is required nằm ở đâu á // Okie gửi lên git lại thử
-// Tui đang test trả dạng file json á/ Chứ send nó chạy vòng vòng ko biet Ý là tui sửa rồi á
-// Chừ ông chạy trên git gì đó lại đi
+
 //LOGIN
 router.post('/login', async (req, res) => {
   //validation the data before
   const { error } = loginValidation.validate(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
+  if (error) return res.status(400).json(error.details[0].message);
 
   //checking if the user exists
   const user = await User.findOne({ username: req.body.username });
