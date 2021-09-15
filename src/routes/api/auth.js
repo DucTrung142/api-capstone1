@@ -9,6 +9,7 @@ const User = require('../../app/model/users');
 
 // Chỗ ông bị lỗi là do res.send gửi error (400)á bởi dù kết nối thành công hay không là bên tui
 // sẽ nhận dữ liệu không được á.
+//Gửi lại git thử đi ông.
 
 //REGISTER
 router.post('/register', async (req, res) => {
@@ -92,7 +93,7 @@ router.post('/login', async (req, res) => {
     console.log('connect');
     //create and assign a token
 
-    const token = jwt.sign({ id: user._id }, process.env.TOKEN_SECRET);
+    const token = jwt.sign({ id: user._id }, 'asdjfj123bsdvad');
 
     // res.header('auth-token', token).send({
     //   jwt: token,
@@ -108,6 +109,7 @@ router.post('/login', async (req, res) => {
 
     //return token to client
     // tạm thời tui return tài khoản thử rồi return token
+
     return res.json({
       user: user,
     });
