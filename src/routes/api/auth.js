@@ -9,8 +9,7 @@ const User = require('../../app/model/users');
 
 // Chỗ ông bị lỗi là do res.send gửi error (400)á bởi dù kết nối thành công hay không là bên tui
 // sẽ nhận dữ liệu không được á.
-// Rồi á ông gửi lên git lại đi
-
+// Ông gửi lên git lại đi
 //REGISTER
 router.post('/register', async (req, res) => {
   // Validation the data before
@@ -63,14 +62,21 @@ router.post('/register', async (req, res) => {
 //LOGIN
 router.post('/login', async (req, res) => {
   try {
+    // Chỗ validation bị lỗi gì á. Có gì ông check chỗ nãy giùm nha//ok
     //validation the data before
-    const { error } = loginValidation.validate(req.body);
-    if (error)
-      // return res.status(400).json(error.details[0].message);
-      return res.json({ sucess: false, message: 'Error' });
+    // const { error } = loginValidation.validate(req.body);
+    //if (error)
+    // return res.status(400).json(error.details[0].message);
+    const { username, password } = req.body;
+    if (!username || !password)
+      return res.json({
+        sucess: false,
+        message: 'Missing ussername or/and password',
+      });
 
     //checking if the user exists
-    const user = await User.findOne({ username: req.body.username });
+    const user = await User.findOne({ username });
+
     if (!user)
       //return res.status(400).send('username is not found');
       return res.json({ sucess: false, message: 'username is not found' });
@@ -87,6 +93,7 @@ router.post('/login', async (req, res) => {
     //create and assign a token
 
     const token = jwt.sign({ id: user._id }, process.env.TOKEN_SECRET);
+
     // res.header('auth-token', token).send({
     //   jwt: token,
     //   user: {
