@@ -8,6 +8,11 @@ const { registerValidation, loginValidation } = require('../../validation');
 const User = require('../../app/model/users');
 
 // Rồi á Ông. Ông gửi lên git rồi tui test thử
+// Chỗ ông bị lỗi là do res.send gửi error (400)á bởi dù kết nối thành công hay không là bên tui
+// sẽ nhận dữ liệu không được á.
+// Để tui test login thử luôn. uk
+
+// Rồi á ông. đẩy lên git thử
 
 //REGISTER
 router.post('/register', async (req, res) => {
@@ -37,7 +42,7 @@ router.post('/register', async (req, res) => {
 
     // Create and assign a token
     const token = jwt.sign({ _id: savedUser._id }, process.env.TOKEN_SECRET);
-    res.json({
+    return res.json({
       token,
       user,
       savedUser,
@@ -60,37 +65,49 @@ router.post('/register', async (req, res) => {
 
 //LOGIN
 router.post('/login', async (req, res) => {
-  //validation the data before
-  const { error } = loginValidation.validate(req.body);
-  if (error) return res.status(400).json(error.details[0].message);
+  try {
+    //validation the data before
+    const { error } = loginValidation.validate(req.body);
+    if (error)
+      // return res.status(400).json(error.details[0].message);
+      return res.json({ sucess: false, message: 'Error' });
 
-  //checking if the user exists
-  const user = await User.findOne({ username: req.body.username });
-  if (!user)
-    //return res.status(400).send('username is not found');
-    return res
-      .status(400)
-      .json({ sucess: false, message: 'username is not found' });
+    //checking if the user exists
+    const user = await User.findOne({ username: req.body.username });
+    if (!user)
+      //return res.status(400).send('username is not found');
+      return res.json({ sucess: false, message: 'username is not found' });
 
-  //password if correct
-  const validPassword = await bcrypt.compare(req.body.password, user.password);
-  if (!validPassword)
-    //return res.status(400).send('Invalid password');
-    res.status(400).json({ sucess: false, message: 'username is not found' });
-  console.log('connect');
-  //create and assign a token
-  const token = jwt.sign({ _id }, process.env.TOKEN_SECRET);
-  res.header('auth-token', token).send({
-    jwt: token,
-    user: {
-      id: user._id,
-      username: user.username,
-      fullname: user.fullname,
-      phone: user.phone,
-      birthday: user.birthday,
-      avataUrl: user.avataUrl,
-    },
-  });
+    //password if correct
+    const validPassword = await bcrypt.compare(
+      req.body.password,
+      user.password
+    );
+    if (!validPassword)
+      //return res.status(400).send('Invalid password');
+      return res.json({ sucess: false, message: 'password is incorrect' });
+    console.log('connect');
+    //create and assign a token
+    const token = jwt.sign({ _id }, process.env.TOKEN_SECRET);
+    // res.header('auth-token', token).send({
+    //   jwt: token,
+    //   user: {
+    //     id: user._id,
+    //     username: user.username,
+    //     fullname: user.fullname,
+    //     phone: user.phone,
+    //     birthday: user.birthday,
+    //     avataUrl: user.avataUrl,
+    //   },
+    // });
+
+    //return token to client
+    return res.json({
+      token,
+    });
+  } catch (error) {
+    return res.json({ success: false, message: error.message });
+  }
 });
 
 module.exports = router;
