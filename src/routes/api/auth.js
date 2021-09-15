@@ -7,16 +7,20 @@ const { registerValidation, loginValidation } = require('../../validation');
 //post Model
 const User = require('../../app/model/users');
 
+// Rồi á Ông. Ông gửi lên git rồi tui test thử
+
 //REGISTER
 router.post('/register', async (req, res) => {
   // Validation the data before
   const { error } = registerValidation.validate(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
-
+  if (error)
+    //return res.status(400).send(error.details[0].message);
+    return res.json({ success: false, messgae: 'error' });
   //checking if the user is already in the database
   const userExist = await User.findOne({ username: req.body.username });
-  if (userExist) return res.status(400).send('username already exists');
-
+  if (userExist)
+    //return res.status(400).send('username already exists');
+    return res.json({ success: false, messgae: 'username already exists' });
   //hash password
   const salt = await bcrypt.genSalt(10);
   const hashPassword = await bcrypt.hash(req.body.password, salt);
@@ -33,17 +37,22 @@ router.post('/register', async (req, res) => {
 
     // Create and assign a token
     const token = jwt.sign({ _id: savedUser._id }, process.env.TOKEN_SECRET);
-    res.header('auth-token', token).send({
-      jwt: token,
-      User: {
-        id: savedUser._id,
-        username: savedUser.username,
-        fullname: savedUser.fullname,
-        phone: savedUser.phone,
-        birthday: savedUser.birthday,
-        avataUrl: '',
-      },
+    res.json({
+      token,
+      user,
+      savedUser,
     });
+    // res.header('auth-token', token).send({
+    //   jwt: token,
+    //   User: {
+    //     id: savedUser._id,
+    //     username: savedUser.username,
+    //     fullname: savedUser.fullname,
+    //     phone: savedUser.phone,
+    //     birthday: savedUser.birthday,
+    //     avataUrl: '',
+    //   },
+    // });
   } catch (error) {
     res.status(400).send(error);
   }
