@@ -9,7 +9,7 @@ const User = require('../../app/model/users');
 
 // Chỗ ông bị lỗi là do res.send gửi error (400)á bởi dù kết nối thành công hay không là bên tui
 // sẽ nhận dữ liệu không được á.
-// Ông gửi lên git lại đi
+
 //REGISTER
 router.post('/register', async (req, res) => {
   // Validation the data before
@@ -107,8 +107,9 @@ router.post('/login', async (req, res) => {
     // });
 
     //return token to client
+    // tạm thời tui return tài khoản thử rồi return token
     return res.json({
-      token,
+      user: user,
     });
   } catch (error) {
     return res.json({ success: false, message: 'connection failure' });
