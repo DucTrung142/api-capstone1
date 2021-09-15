@@ -7,12 +7,9 @@ const { registerValidation, loginValidation } = require('../../validation');
 //post Model
 const User = require('../../app/model/users');
 
-// Rồi á Ông. Ông gửi lên git rồi tui test thử
 // Chỗ ông bị lỗi là do res.send gửi error (400)á bởi dù kết nối thành công hay không là bên tui
 // sẽ nhận dữ liệu không được á.
-// Để tui test login thử luôn. uk
-
-// Rồi á ông. đẩy lên git thử
+// Rồi á ông gửi lên git lại đi
 
 //REGISTER
 router.post('/register', async (req, res) => {
@@ -88,7 +85,8 @@ router.post('/login', async (req, res) => {
       return res.json({ sucess: false, message: 'password is incorrect' });
     console.log('connect');
     //create and assign a token
-    const token = jwt.sign({ _id }, process.env.TOKEN_SECRET);
+
+    const token = jwt.sign({ id: user._id }, process.env.TOKEN_SECRET);
     // res.header('auth-token', token).send({
     //   jwt: token,
     //   user: {
@@ -106,7 +104,7 @@ router.post('/login', async (req, res) => {
       token,
     });
   } catch (error) {
-    return res.json({ success: false, message: error.message });
+    return res.json({ success: false, message: 'connection failure' });
   }
 });
 
