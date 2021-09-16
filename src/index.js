@@ -4,7 +4,7 @@ const db = require('./config/db');
 const express = require('express');
 const cors = require('cors');
 
-const app = express();
+//choox ni không nên import nè. import là bên reactjs rồi á.
 
 //router
 const authRouter = require('./routes/api/auth');
@@ -13,6 +13,7 @@ const authRouter = require('./routes/api/auth');
 db.connect();
 
 //bodyParser Middelware
+const app = express();
 app.use(express.json());
 
 app.use(cors());

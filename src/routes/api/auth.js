@@ -9,7 +9,9 @@ const User = require('../../app/model/users');
 
 // Chỗ ông bị lỗi là do res.send gửi error (400)á bởi dù kết nối thành công hay không là bên tui
 // sẽ nhận dữ liệu không được á.
-//Gửi lại git thử đi ông.
+// Okie rồi á ông. Tui nhận được dữ liệu rồi. Bé chung có gửi ảnh cho ông coi rồi á//ok ths ong
+// chỗ .env nó bị gì hay sao nên tạo token không được á có gì ông coi lại chỗ thư viện dotenv hỉ // oke
+// Okie rồi á ông. Ông đổi git lên giùm
 
 //REGISTER
 router.post('/register', async (req, res) => {
@@ -36,13 +38,14 @@ router.post('/register', async (req, res) => {
   });
   try {
     const savedUser = await newUser.save();
+    console.log(savedUser);
 
     // Create and assign a token
     const token = jwt.sign({ _id: savedUser._id }, process.env.TOKEN_SECRET);
+    console.log(token);
     return res.json({
       token,
-      user,
-      savedUser,
+      user: savedUser,
     });
     // res.header('auth-token', token).send({
     //   jwt: token,
@@ -111,11 +114,51 @@ router.post('/login', async (req, res) => {
     // tạm thời tui return tài khoản thử rồi return token
 
     return res.json({
-      user: user,
+      token,
     });
   } catch (error) {
     return res.json({ success: false, message: 'connection failure' });
   }
 });
+
+// [Get] /auth
+// Check token
+router.get(
+  '/',
+  async (request, response, next) => {
+    //get Token from Authoriztion client
+    const header = request.header('Authorization');
+
+    const token = header && header.split(' ')[1];
+
+    try {
+      if (token) {
+        //verify Token from client
+        const verifyToken = await jwt.verify(token, 'asdjfj123bsdvad');
+
+        if (verifyToken) {
+          // Find idUser from Token
+          const user = await User.findById(verifyToken._id).select('-password');
+          if (user)
+            // return if idUser in token is true
+            return response.json({ success: true, token: token, user: user });
+          else
+            return response.json({
+              success: false,
+              message: 'Token is incorrect',
+            });
+        } else
+          return response.json({
+            success: false,
+            message: 'Token is incorrect',
+          });
+      } else
+        return response.json({ success: false, message: 'Token not found' });
+    } catch (error) {
+      return response.json({ success: false, message: 'Token is incorrect' });
+    }
+  },
+  async (request, response) => {}
+);
 
 module.exports = router;
