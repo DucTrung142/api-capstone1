@@ -38,7 +38,7 @@ router.post('/register', async (req, res) => {
 
     // Create and assign a token
     const token = jwt.sign({ _id: savedUser._id }, process.env.TOKEN_SECRET);
-    res.header('auth-token', token).send({
+    res.header('auth-token', token).json({
       jwt: token,
       User: {
         id: savedUser._id,
