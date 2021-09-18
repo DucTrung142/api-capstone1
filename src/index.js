@@ -7,7 +7,8 @@ const cors = require('cors');
 //choox ni không nên import nè. import là bên reactjs rồi á.
 
 //router
-const authRouter = require('./routes/api/auth');
+const authRoute = require('./routes/api/auth');
+const userRoute = require('./routes/api/user');
 
 //connect to DB
 db.connect();
@@ -18,12 +19,9 @@ app.use(express.json());
 
 app.use(cors());
 
-// app.get('/', (req, res) => {
-//   res.send('Khoa ngu');
-// });
-
 //user router
-app.use('/auth', authRouter);
+app.use('/auth', authRoute);
+app.use('/user', userRoute);
 
 const PORT = process.env.PORT || 2000;
 
