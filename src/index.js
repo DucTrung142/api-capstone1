@@ -9,6 +9,7 @@ const cors = require('cors');
 //router
 const authRoute = require('./routes/api/auth');
 const userRoute = require('./routes/api/user');
+const uploadRoute = require('./routes/api/upload');
 
 //connect to DB
 db.connect();
@@ -16,12 +17,14 @@ db.connect();
 //bodyParser Middelware
 const app = express();
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.use(cors());
 
 //user router
 app.use('/auth', authRoute);
 app.use('/user', userRoute);
+app.use('/upload', uploadRoute);
 
 const PORT = process.env.PORT || 2000;
 
