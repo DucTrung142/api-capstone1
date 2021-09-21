@@ -12,7 +12,8 @@ const { json } = require('express');
 router.post('/register', async (req, res) => {
   // Validation the data before
   const { error } = registerValidation.validate(req.body);
-  if (error) return res.json({ success: false, messgae: 'Error' });
+  if (error)
+    return res.json({ success: false, messgae: error.details[0].message });
 
   //checking if the user is already in the database
   const userExist = await User.findOne({ username: req.body.username });
@@ -57,7 +58,11 @@ router.post('/login', async (req, res) => {
   try {
     //validation the data before
     const { error } = loginValidation.validate(req.body);
-    if (error) return res.status(400).json(error.details[0].message);
+    if (error)
+      return res.json({
+        success: false,
+        messgae: error.details[0].message,
+      });
 
     const { username, password } = req.body;
     if (!username || !password)
