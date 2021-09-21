@@ -11,7 +11,12 @@ router.post('/', upload.single('image'), async (req, res) => {
       // width: 240,
       // height: 240,
     });
-
+    cloudinary.image('sample', {
+      format: 'png',
+      width: 100,
+      height: 100,
+      crop: 'fill',
+    });
     res.status(200).json({
       name: req.file.originalname,
       url: result.secure_url,
