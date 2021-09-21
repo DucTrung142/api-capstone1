@@ -57,11 +57,11 @@ router.post('/login', async (req, res) => {
   try {
     //validation the data before
     const { error } = loginValidation.validate(req.body);
-    if (error) return json(error.details[0].message);
+    if (error) return res.status(400).json(error.details[0].message);
 
     const { username, password } = req.body;
     if (!username || !password)
-      return json({
+      return res.status(400).json({
         sucess: false,
         message: 'Missing ussername or/and password',
       });
@@ -69,7 +69,9 @@ router.post('/login', async (req, res) => {
     //checking if the user exists
     const user = await User.findOne({ username });
     if (!user)
-      return res.json({ sucess: false, message: 'Username is not found!!!' });
+      return res
+        .status(400)
+        .json({ sucess: false, message: 'Username is not found!!!' });
 
     //password if correct
     const validPassword = await bcrypt.compare(
@@ -77,7 +79,9 @@ router.post('/login', async (req, res) => {
       user.password
     );
     if (!validPassword)
-      return res.json({ sucess: false, message: 'Password is incorrect!' });
+      return res
+        .status(400)
+        .json({ sucess: false, message: 'Password is incorrect!' });
 
     //create and assign a token
     const token = jwt.sign({ id: user._id }, process.env.TOKEN_SECRET);
@@ -93,7 +97,9 @@ router.post('/login', async (req, res) => {
       },
     });
   } catch (error) {
-    return res.json({ success: false, message: 'Connection failure!!!' });
+    return res
+      .status(400)
+      .json({ success: false, message: 'Connection failure!!!' });
   }
 });
 
