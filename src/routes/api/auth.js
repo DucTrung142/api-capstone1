@@ -13,12 +13,18 @@ router.post('/register', async (req, res) => {
   // Validation the data before
   const { error } = registerValidation.validate(req.body);
   if (error)
-    return res.json({ success: false, messgae: error.details[0].message });
+    return res.json({
+      sucess: false,
+      message: error.details[0].message,
+    });
 
   //checking if the user is already in the database
   const userExist = await User.findOne({ username: req.body.username });
   if (userExist)
-    return res.json({ success: false, messgae: 'Username already exists' });
+    return res.json({
+      sucess: false,
+      message: 'Username already exists',
+    });
 
   //hash password
   const salt = await bcrypt.genSalt(10);
@@ -60,8 +66,8 @@ router.post('/login', async (req, res) => {
     const { error } = loginValidation.validate(req.body);
     if (error)
       return res.json({
-        success: false,
-        messgae: error.details[0].message,
+        sucess: false,
+        message: error.details[0].message,
       });
 
     const { username, password } = req.body;
@@ -98,7 +104,7 @@ router.post('/login', async (req, res) => {
       },
     });
   } catch (error) {
-    return res.json({ success: false, message: 'Connection failure!!!' });
+    return res.json({ sucess: false, message: 'Connection failure!!!' });
   }
 });
 
