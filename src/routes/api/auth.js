@@ -12,14 +12,12 @@ const { json } = require('express');
 router.post('/register', async (req, res) => {
   // Validation the data before
   const { error } = registerValidation.validate(req.body);
-  if (error) return res.status(400).json({ success: false, messgae: 'Error' });
+  if (error) return res.json({ success: false, messgae: 'Error' });
 
   //checking if the user is already in the database
   const userExist = await User.findOne({ username: req.body.username });
   if (userExist)
-    return res
-      .status(400)
-      .json({ success: false, messgae: 'Username already exists' });
+    return res.json({ success: false, messgae: 'Username already exists' });
 
   //hash password
   const salt = await bcrypt.genSalt(10);
@@ -59,11 +57,11 @@ router.post('/login', async (req, res) => {
   try {
     //validation the data before
     const { error } = loginValidation.validate(req.body);
-    if (error) return res.status(400).json(error.details[0].message);
+    if (error) return json(error.details[0].message);
 
     const { username, password } = req.body;
     if (!username || !password)
-      return res.status(400).json({
+      return json({
         sucess: false,
         message: 'Missing ussername or/and password',
       });
@@ -71,9 +69,7 @@ router.post('/login', async (req, res) => {
     //checking if the user exists
     const user = await User.findOne({ username });
     if (!user)
-      return res
-        .status(400)
-        .json({ sucess: false, message: 'Username is not found!!!' });
+      return res.json({ sucess: false, message: 'Username is not found!!!' });
 
     //password if correct
     const validPassword = await bcrypt.compare(
@@ -81,9 +77,7 @@ router.post('/login', async (req, res) => {
       user.password
     );
     if (!validPassword)
-      return res
-        .status(400)
-        .json({ sucess: false, message: 'Password is incorrect!' });
+      return res.json({ sucess: false, message: 'Password is incorrect!' });
 
     //create and assign a token
     const token = jwt.sign({ id: user._id }, process.env.TOKEN_SECRET);
@@ -99,9 +93,7 @@ router.post('/login', async (req, res) => {
       },
     });
   } catch (error) {
-    return res
-      .status(400)
-      .json({ success: false, message: 'Connection failure!!!' });
+    return res.json({ success: false, message: 'Connection failure!!!' });
   }
 });
 
