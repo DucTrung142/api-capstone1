@@ -57,11 +57,11 @@ router.post('/login', async (req, res) => {
   try {
     //validation the data before
     const { error } = loginValidation.validate(req.body);
-    if (error) return res.json(error.details[0].message);
+    if (error) return res.status(400).json(error.details[0].message);
 
     const { username, password } = req.body;
     if (!username || !password)
-      return res.status(400).json({
+      return res.json({
         sucess: false,
         message: 'Missing ussername or/and password',
       });
