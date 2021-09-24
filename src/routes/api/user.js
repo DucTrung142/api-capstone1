@@ -28,7 +28,7 @@ router.patch('/:userId', verify, async (req, res) => {
 
       phone: updatedUser.phone || '',
       birthday: updatedUser.birthday || '',
-      avataUrl: updatedUser.avataUrl || '',
+      avatarUrl: updatedUser.avatarUrl || '',
     },
   });
 });
@@ -44,7 +44,7 @@ router.get('/:userId', verify, async (req, res) => {
 
       phone: user.phone || '',
       birthday: user.birthday || '',
-      avataUrl: user.avataUrl || '',
+      avatarUrl: user.avatarUrl || '',
     },
   });
 });

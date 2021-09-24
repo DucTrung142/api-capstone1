@@ -51,7 +51,7 @@ router.post('/register', async (req, res) => {
         fullname: savedUser.fullname,
         phone: savedUser.phone,
         birthday: savedUser.birthday,
-        avataUrl: '',
+        avatarUrl: '',
       },
     });
   } catch (error) {
@@ -100,7 +100,7 @@ router.post('/login', async (req, res) => {
         fullname: user.fullname,
         phone: user.phone,
         birthday: user.birthday,
-        avataUrl: user.avataUrl,
+        avatarUrl: user.avatarUrl,
       },
     });
   } catch (error) {
