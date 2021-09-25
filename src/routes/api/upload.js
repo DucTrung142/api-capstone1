@@ -9,6 +9,8 @@ router.post('/', upload.single('image'), async (req, res) => {
     const result = await cloudinary.uploader.upload(req.file.path, {
       folder: 'image-uploader',
       width: 160,
+      height: 160,
+      borderRadius: 30,
     });
     res.status(200).json({
       name: req.file.originalname,
