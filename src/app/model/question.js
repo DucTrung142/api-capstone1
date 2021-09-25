@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const date = new Date();
 
 const QuestionSchema = new Schema({
   examdate: {
@@ -12,11 +11,11 @@ const QuestionSchema = new Schema({
     required: true,
   },
   open: {
-    type: date.getTime,
+    // type: date.getTime,
     // required: true,
   },
   due: {
-    type: date.getTime,
+    // type: date.getTime,
     //   required:true,
   },
   quiz: [
