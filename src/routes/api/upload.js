@@ -10,7 +10,7 @@ router.post('/', upload.single('image'), async (req, res) => {
       folder: 'image-uploader',
       width: 160,
       height: 160,
-      borderRadius: 30,
+      borderRadius: 100,
     });
     res.status(200).json({
       name: req.file.originalname,
