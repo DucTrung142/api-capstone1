@@ -2,50 +2,68 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const QuestionSchema = new Schema({
-  examdate: {
+  id_exam: {
+    type: Number,
+    required: true,
+  },
+  exam_date_db: {
     type: Date,
-    required: true,
   },
-  examtopic: {
-    type: String,
-    required: true,
+  exam_topic_db: {
+    type: Date,
   },
-  open: {
-    // type: date.getTime,
-    // required: true,
+  exam_open_db: {
+    type: Date,
   },
-  due: {
-    // type: date.getTime,
-    //   required:true,
+  exam_due_db: {
+    type: Date,
   },
   quiz: [
     {
-      questionNumber: {
+      name_question: {
         type: Number,
-        // required: true,
+        required: true,
       },
-      typeQuestion: {
+      content_question: {
         type: String,
-        // required: true,
+        required: true,
       },
-      scoreFactor: {
+      point_question: {
         type: Number,
-        // required: true,
-      },
-      description: {
-        type: String,
         required: true,
       },
       alternatives: [
         {
-          text: {
+          content_question_type1_ans: {
             type: String,
-            required: true,
+            required: false,
           },
-          isCorrect: {
+          question_type1_ans: {
             type: Boolean,
-            required: true,
-            default: false,
+            required: false,
+          },
+
+          content_question_type2: {
+            type: String,
+            required: false,
+          },
+          question_type2: {
+            type: Boolean,
+            required: false,
+          },
+
+          content_question_type3_ans: {
+            type: String,
+            required: false,
+          },
+          question_type3_ans: {
+            type: Boolean,
+            required: false,
+          },
+
+          question_type4: {
+            type: String,
+            required: false,
           },
         },
       ],

@@ -25,8 +25,8 @@ app.use(cors()); // We're telling express to use CORS
 app.use('/auth', authRoute);
 app.use('/user', userRoute);
 app.use('/upload', uploadRoute);
-// app.use('/quiz', question);
+app.use('/quiz', question);
 
-const PORT = process.env.PORT || 2000;
+const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => console.log(`Sever run at http://localhost:${PORT}`));

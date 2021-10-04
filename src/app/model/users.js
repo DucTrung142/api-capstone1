@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+// const mongooseDateFormat = require('mongoose-date-format');
+const moment = require('moment');
 
 const UserSchema = new Schema({
   avatarUrl: {
@@ -13,7 +15,7 @@ const UserSchema = new Schema({
     type: String,
   },
   birthday: {
-    type: Date,
+    type: moment(Date).format('DD/MM/YYYY'),
   },
   username: {
     type: String,

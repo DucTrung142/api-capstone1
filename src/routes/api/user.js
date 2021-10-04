@@ -3,10 +3,9 @@ const router = express.Router();
 const verifyToken = require('../../middleware/verifyToken');
 const User = require('../../app//model/users');
 const bcrypt = require('bcrypt');
-const { verify } = require('jsonwebtoken');
 
 //UPDATE ACCOUNT
-router.patch('/:userId', verify, async (req, res) => {
+router.patch('/:userId', verifyToken, async (req, res) => {
   const { userId } = req.params;
   const { password } = req.body;
 
@@ -33,7 +32,7 @@ router.patch('/:userId', verify, async (req, res) => {
   });
 });
 
-router.get('/:userId', verify, async (req, res) => {
+router.get('/:userId', verifyToken, async (req, res) => {
   const { userId } = req.params;
   const user = await User.findById(userId);
   res.json({
