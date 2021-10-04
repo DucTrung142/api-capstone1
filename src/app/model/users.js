@@ -15,7 +15,7 @@ const UserSchema = new Schema({
     type: String,
   },
   birthday: {
-    type: moment(Date).format('DD/MM/YYYY'),
+    type: Date,
   },
   username: {
     type: String,
