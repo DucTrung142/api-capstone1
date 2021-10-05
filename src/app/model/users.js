@@ -1,7 +1,5 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-// const mongooseDateFormat = require('mongoose-date-format');
-const moment = require('moment');
 
 const UserSchema = new Schema({
   avatarUrl: {
