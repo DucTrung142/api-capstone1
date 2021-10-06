@@ -17,7 +17,7 @@ const QuestionSchema = new Schema({
     type: Date,
   },
   exam_due_db: {
-    type: Date,
+    type: Number,
   },
   quiz: [
     {
