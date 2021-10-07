@@ -11,7 +11,7 @@ const QuestionSchema = new Schema({
   },
   exam_topic_db: {
     type: String,
-    required: true,
+    // required: true,
   },
   exam_open_db: {
     type: Date,
