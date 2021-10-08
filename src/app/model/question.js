@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const QuestionSchema = new Schema({
   id_exam: {
     type: Number,
-    required: true,
+    // required: true,
   },
   exam_date_db: {
     type: Date,
@@ -23,15 +23,15 @@ const QuestionSchema = new Schema({
     {
       name_question: {
         type: Number,
-        required: true,
+        // required: true,
       },
       content_question: {
         type: String,
-        required: true,
+        // required: true,
       },
       point_question: {
         type: Number,
-        required: true,
+        // required: true,
       },
       alternatives: [
         {
