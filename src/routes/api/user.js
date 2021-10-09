@@ -32,7 +32,7 @@ router.patch('/:userId', verifyToken, async (req, res) => {
   });
 });
 
-router.get('/:userId', async (req, res) => {
+router.get('/:userId', verifyToken, async (req, res) => {
   const { userId } = req.params;
   const user = await User.findById(userId);
   res.json({
