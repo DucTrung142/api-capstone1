@@ -18,14 +18,12 @@ router.get('/question', async (req, res) => {
 //get one quiz question
 router.get('/question/:id', async (req, res) => {
   try {
-    const id_exam = req.params.id_exam;
-
-    const question = await Question.findOne(id_exam);
-    if (!question) {
-      return res.status(404).json({});
-    } else {
-      return res.status(200).json(question);
-    }
+    const id = req.params.id;
+    console.log(id);
+    const question = await Question.findOne({ id_exam: id });
+    res.status(200).json({
+      question,
+    });
   } catch (error) {
     return res.status(500).json({ error: error });
   }
@@ -41,7 +39,7 @@ router.post('/question/', async (req, res) => {
     exam_due_db: req.body.exam_due_db,
     quiz: req.body.quiz,
     name_question: req.body.name_question,
-    content_question: req.body.content_question,
+    question_content: req.body.question_content,
     point_question: req.body.point_question,
     alternatives: req.body.alternatives,
   });

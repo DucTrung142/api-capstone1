@@ -1,0 +1,1 @@
+QUES_TYPE.YES_NO;

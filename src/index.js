@@ -1,5 +1,6 @@
 require('dotenv').config();
 
+require('module-alias/register');
 const db = require('./config/db');
 const express = require('express');
 const cors = require('cors');
@@ -7,10 +8,10 @@ const cors = require('cors');
 //choox ni không nên import nè. import là bên reactjs rồi á.
 
 //router
-const authRoute = require('./routes/api/auth');
-const userRoute = require('./routes/api/user');
-const uploadRoute = require('./routes/api/upload');
-const question = require('./routes/api/question');
+const authRoute = require('@api/auth');
+const userRoute = require('@api/user');
+const uploadRoute = require('@api/upload');
+const question = require('@api/question');
 
 //connect to DB
 db.connect();
