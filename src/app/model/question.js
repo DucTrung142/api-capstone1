@@ -38,11 +38,29 @@ const QuestionSchema = new Schema({
     type: String,
     // required: true,
   },
-  exam_open_db: {
-    type: Date,
+  hourOpen: {
+    type: Number,
+    // required:true,
   },
-  exam_due_db: {
-    type: Date,
+  minuteOpen: {
+    type: Number,
+    // required:true,
+  },
+  secondOpen: {
+    type: Number,
+    // required:true,
+  },
+  hourDue: {
+    type: Number,
+    // required:true,
+  },
+  minuteDue: {
+    type: Number,
+    // required:true,
+  },
+  secondDue: {
+    type: Number,
+    // required:true,
   },
   quiz: [
     {
