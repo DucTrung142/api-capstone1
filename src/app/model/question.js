@@ -28,7 +28,7 @@ const QuestionSchema = new Schema({
   // });
 
   id_exam: {
-    type: Number,
+    type: String,
     // required: true,
   },
   exam_date_db: {
