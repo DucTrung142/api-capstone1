@@ -38,27 +38,27 @@ const QuestionSchema = new Schema({
     type: String,
     // required: true,
   },
-  hourOpen: {
+  hourOpenDb: {
     type: Number,
     // required:true,
   },
-  minuteOpen: {
+  minuteOpenDb: {
     type: Number,
     // required:true,
   },
-  secondOpen: {
+  secondOpenDb: {
     type: Number,
     // required:true,
   },
-  hourDue: {
+  hourDueDb: {
     type: Number,
     // required:true,
   },
-  minuteDue: {
+  minuteDueDb: {
     type: Number,
     // required:true,
   },
-  secondDue: {
+  secondDueDb: {
     type: Number,
     // required:true,
   },
