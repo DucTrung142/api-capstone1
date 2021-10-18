@@ -62,6 +62,14 @@ const QuestionSchema = new Schema({
     type: Number,
     // required:true,
   },
+  totalQuestionDb: {
+    type: Number,
+    // required: true,
+  },
+  totalScoreDb: {
+    type: Number,
+    // required: true,
+  },
   quiz: [
     {
       name_question: {
