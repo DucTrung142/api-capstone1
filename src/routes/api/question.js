@@ -6,9 +6,9 @@ const verifyToken = require('../../middleware/verifyToken');
 const Question = require('../../app/model/question');
 
 //get all quiz questions
-router.get('/question', async (req, res) => {
+router.get('/question', verifyToken, async (req, res) => {
   try {
-    const questions = await Question.find();
+    const questions = await Question.find({ id_user: req.user.id });
     return res.status(200).json(questions);
   } catch (error) {
     return res.status(500).json({ error: error });
@@ -16,7 +16,7 @@ router.get('/question', async (req, res) => {
 });
 
 //get one quiz question
-router.get('/question/:id', async (req, res) => {
+router.get('/question/:id', verifyToken, async (req, res) => {
   try {
     const id = req.params.id;
     console.log(id);
@@ -30,8 +30,10 @@ router.get('/question/:id', async (req, res) => {
 });
 
 //create one quiz question
-router.post('/question/', async (req, res) => {
+router.post('/question/', verifyToken, async (req, res) => {
+  console.log(req);
   const newQuestion = new Question({
+    id_user: req.user.id,
     id_exam: req.body.id_exam,
     exam_date_db: req.body.exam_date_db,
     exam_topic_db: req.body.exam_topic_db,
@@ -59,18 +61,28 @@ router.post('/question/', async (req, res) => {
 });
 
 //update one quiz question
-router.patch('/question/:id', async (req, res) => {
+router.patch('/question/:id', verifyToken, async (req, res) => {
   try {
+    const id = req.params.id;
+    const updateQuestion = await Question.findOneAndUpdate(
+      { id_exam: id },
+      req.body,
+      {
+        new: true,
+      }
+    );
+    res.json({
+      updateQuestion,
+    });
   } catch (error) {
     return res.status(500).json({ error: error });
   }
 });
 
 //delete one quiz question
-router.delete('/question/:id', async (req, res) => {
+router.delete('/question/:id', verifyToken, async (req, res) => {
   try {
-    const id_exam = req.params.id_exam;
-
+    const id_exam = req.params.id;
     const question = await Question.deleteOne({ id_exam });
 
     if (question.deletedCount === 0) {

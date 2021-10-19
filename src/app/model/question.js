@@ -26,7 +26,10 @@ const QuestionSchema = new Schema({
   //     },
   //   ],
   // });
-
+  id_user: {
+    type: mongoose.Types.ObjectId,
+    ref: 'User',
+  },
   id_exam: {
     type: String,
     // required: true,
