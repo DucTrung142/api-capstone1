@@ -93,7 +93,7 @@ router.delete('/question/:id', verifyToken, async (req, res) => {
     if (question.deletedCount === 0) {
       return res.status(404).json();
     } else {
-      return res.status(204).json(question);
+      return res.status(200).json(question);
     }
   } catch (error) {
     return res.status(500).json({ error: error });
