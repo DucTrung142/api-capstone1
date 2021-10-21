@@ -83,10 +83,13 @@ router.patch('/question/:id', verifyToken, async (req, res) => {
 router.delete('/question/:id', verifyToken, async (req, res) => {
   try {
     const id_exam = req.params.id;
-    const question = await Question.deleteOne({ id_exam }, req.body, {
-      new: true,
-    });
-
+    console.log(id_exam);
+    const question = await Question.deleteOne(
+      { id_exam },
+      {
+        new: true,
+      }
+    );
     if (question.deletedCount === 0) {
       return res.status(404).json();
     } else {
