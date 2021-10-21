@@ -84,7 +84,7 @@ router.delete('/question/:id', verifyToken, async (req, res) => {
   try {
     const id_exam = req.params.id;
     console.log(id_exam);
-    const question = await Question.deleteOne(
+    const question = await Question.findOneAndDelete(
       { id_exam },
       {
         new: true,
