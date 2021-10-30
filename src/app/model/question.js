@@ -2,30 +2,6 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const QuestionSchema = new Schema({
-  //   id_exam: {
-  //     type: Number,
-  //     // required: true,
-  //   },
-  //   exam_date_db: {
-  //     type: Date,
-  //   },
-  //   exam_topic_db: {
-  //     type: String,
-  //     // required: true,
-  //   },
-  //   exam_open_db: {
-  //     type: Date,
-  //   },
-  //   exam_due_db: {
-  //     type: Date,
-  //   },
-  //   quiz: [
-  //     {
-  //       type: mongoose.Schema.Types.ObjectId,
-  //       ref: 'Quiz',
-  //     },
-  //   ],
-  // });
   id_user: {
     type: mongoose.Types.ObjectId,
     ref: 'User',
@@ -42,27 +18,27 @@ const QuestionSchema = new Schema({
     // required: true,
   },
   hourOpenDb: {
-    type: Number,
+    type: String,
     // required:true,
   },
   minuteOpenDb: {
-    type: Number,
+    type: String,
     // required:true,
   },
   secondOpenDb: {
-    type: Number,
+    type: String,
     // required:true,
   },
   hourDueDb: {
-    type: Number,
+    type: String,
     // required:true,
   },
   minuteDueDb: {
-    type: Number,
+    type: String,
     // required:true,
   },
   secondDueDb: {
-    type: Number,
+    type: String,
     // required:true,
   },
   totalQuestionDb: {
