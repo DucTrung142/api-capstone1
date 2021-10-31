@@ -21,7 +21,8 @@
     "moment": "^2.29.1",
     "mongoose": "^6.0.3",
     "mongoose-date-format": "^1.2.0",
-    "multer": "^1.4.3"
+    "multer": "^1.4.3",
+    "socket.io": "^4.3.1"
   },
   "_moduleAliases": {
     "@root": ".",

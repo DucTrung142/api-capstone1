@@ -75,7 +75,8 @@ router.patch('/question/:id', verifyToken, async (req, res) => {
       }
     );
     res.json({
-      updateQuestion,
+      success: true,
+      quiz: updateQuestion,
     });
   } catch (error) {
     return res.status(500).json({ error: error });
