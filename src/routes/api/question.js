@@ -23,7 +23,7 @@ router.get('/question/:id', verifyToken, async (req, res) => {
     const question = await Question.findOne({ id_exam: id });
     res.status(200).json({
       success: true,
-      quiz: question,
+      question: question,
     });
   } catch (error) {
     return res.status(500).json({ error: error });
@@ -57,7 +57,7 @@ router.post('/question/', verifyToken, async (req, res) => {
 
     res.json({
       success: true,
-      quiz: saveQuestion,
+      question: saveQuestion,
     });
   } catch (error) {
     res.json({ message: error });
@@ -77,7 +77,7 @@ router.patch('/question/:id', verifyToken, async (req, res) => {
     );
     res.json({
       success: true,
-      quiz: updateQuestion,
+      question: updateQuestion,
     });
   } catch (error) {
     return res.status(500).json({ error: error });
