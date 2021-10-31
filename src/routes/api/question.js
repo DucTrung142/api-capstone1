@@ -22,7 +22,8 @@ router.get('/question/:id', verifyToken, async (req, res) => {
     console.log(id);
     const question = await Question.findOne({ id_exam: id });
     res.status(200).json({
-      question,
+      success: true,
+      quiz: question,
     });
   } catch (error) {
     return res.status(500).json({ error: error });
