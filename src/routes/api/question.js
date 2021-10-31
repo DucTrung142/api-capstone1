@@ -54,7 +54,10 @@ router.post('/question/', verifyToken, async (req, res) => {
   try {
     const saveQuestion = await newQuestion.save();
 
-    res.json(saveQuestion);
+    res.json({
+      success: true,
+      quiz: saveQuestion,
+    });
   } catch (error) {
     res.json({ message: error });
   }
