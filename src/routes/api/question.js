@@ -22,7 +22,6 @@ router.get('/question/:id', verifyToken, async (req, res) => {
     console.log(id);
     const question = await Question.findOne({ id_exam: id });
     res.status(200).json({
-      success: true,
       question: question,
     });
   } catch (error) {
@@ -56,7 +55,6 @@ router.post('/question/', verifyToken, async (req, res) => {
     const saveQuestion = await newQuestion.save();
 
     res.json({
-      success: true,
       question: saveQuestion,
     });
   } catch (error) {
@@ -76,8 +74,7 @@ router.patch('/question/:id', verifyToken, async (req, res) => {
       }
     );
     res.json({
-      success: true,
-      question: updateQuestion,
+      updateQuestion,
     });
   } catch (error) {
     return res.status(500).json({ error: error });
