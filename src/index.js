@@ -43,7 +43,7 @@ app.use('/quiz', question);
 
 const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, () => console.log(`Sever run at http://localhost:${PORT}`));
+server.listen(PORT, () => console.log(`Sever run at http://localhost:${PORT}`));
 
 // Socket
 io.on('connect', (socket) => {
@@ -93,5 +93,3 @@ io.on('connect', (socket) => {
     }
   });
 });
-
-server.listen(8000, () => console.log('Server started on 8000'));

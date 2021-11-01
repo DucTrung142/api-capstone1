@@ -28,6 +28,19 @@ router.get('/question/:id', verifyToken, async (req, res) => {
     return res.status(500).json({ error: error });
   }
 });
+//get one quiz question
+router.get('/examtopic/:id', async (req, res) => {
+  try {
+    const topic = req.params.id;
+    console.log(req.params.id);
+    const exam_topic = await Question.find({ exam_topic_db: topic });
+    res.status(200).json({
+      exam_topic,
+    });
+  } catch (error) {
+    return res.status(500).json({ error: error });
+  }
+});
 
 //create one quiz question
 router.post('/question/', verifyToken, async (req, res) => {
