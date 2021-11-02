@@ -43,7 +43,7 @@ app.use('/quiz', question);
 
 const PORT = process.env.PORT || 3000;
 
-server.listen(PORT, () => console.log(`Sever run at http://localhost:${PORT}`));
+app.listen(PORT, () => console.log(`Sever run at http://localhost:${PORT}`));
 
 // Socket
 io.on('connect', (socket) => {
