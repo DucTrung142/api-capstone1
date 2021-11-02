@@ -60,6 +60,7 @@ router.post('/question/', verifyToken, async (req, res) => {
     totalScoreDb: req.body.totalScoreDb,
     quiz: req.body.quiz,
     name_question: req.body.name_question,
+    question_type: req.body.question_type,
     question_content: req.body.question_content,
     point_question: req.body.point_question,
     alternatives: req.body.alternatives,
