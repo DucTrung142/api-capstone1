@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const cloudinary = require('cloudinary').v2;
 
-// const upload = require('../../config/db/multer');
+const upload = require('../../config/db/multerfile');
 
 router.post('/file', upload.single('file'), async (req, res) => {
   try {
