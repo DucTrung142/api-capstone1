@@ -9,6 +9,7 @@ const authRoute = require('@api/auth');
 const userRoute = require('@api/user');
 const uploadRoute = require('@api/upload');
 const question = require('@api/question');
+const uploadfileRoute = require('@api/uploadfile');
 
 //connect to DB
 db.connect();
@@ -29,6 +30,7 @@ app.use('/auth', authRoute);
 app.use('/user', userRoute);
 app.use('/upload', uploadRoute);
 app.use('/quiz', question);
+app.use('/upload', uploadfileRoute);
 
 const PORT = process.env.PORT || 3000;
 
