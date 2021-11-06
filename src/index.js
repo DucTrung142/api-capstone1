@@ -10,6 +10,7 @@ const userRoute = require('@api/user');
 const uploadRoute = require('@api/upload');
 const question = require('@api/question');
 const uploadfileRoute = require('@api/uploadfile');
+const result = require('@api/results');
 
 //connect to DB
 db.connect();
@@ -31,6 +32,7 @@ app.use('/user', userRoute);
 app.use('/upload', uploadRoute);
 app.use('/quiz', question);
 app.use('/upload', uploadfileRoute);
+app.use('/result', result);
 
 const PORT = process.env.PORT || 3000;
 

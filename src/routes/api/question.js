@@ -28,7 +28,7 @@ router.get('/question/:id', verifyToken, async (req, res) => {
     return res.status(500).json({ error: error });
   }
 });
-//get one quiz question
+//get exam on topic
 router.get('/examtopic/:id', async (req, res) => {
   try {
     const topic = req.params.id;
