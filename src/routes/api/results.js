@@ -15,12 +15,22 @@ router.post('/', verifyToken, async (req, res) => {
           if ((user && !exam) || !user) {
             var total_score = 0;
             const { quiz } = req.body;
-            quiz.forEach((element) => {
-              element.alternatives.forEach((alternative) => {
-                if (alternative.answer_correct === alternative.answer_choosen)
-                  total_score += element.point_question;
-              });
-            });
+            for (element of quiz) {
+              var boolean = false;
+              for (alternative of element.alternatives) {
+                if (alternative.answer_correct) {
+                  if (
+                    alternative.answer_correct === alternative?.answer_choosen
+                  )
+                    boolean = true;
+                  else {
+                    boolean = false;
+                    break;
+                  }
+                }
+              }
+              total_score += boolean ? parseFloat(element.point_question) : 0;
+            }
             const newResult = new Result({
               id_user: req.user.id,
               id_exam: req.body.id_exam,
