@@ -1,18 +1,14 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const results = new Schema({
+const ResultsSchema = new Schema({
   id_user: {
     type: mongoose.Types.ObjectId,
     ref: 'User',
   },
-  name_user: {
-    type: mongoose.Types.ObjectId,
-    ref: 'User',
-  },
   id_exam: {
-    type: mongoose.Types.ObjectId,
-    ref: 'Question',
+    type: String,
+    required: true,
   },
   totalhourDb: {
     type: String,
@@ -38,18 +34,22 @@ const results = new Schema({
     type: String,
     // required:true,
   },
-  score_exam: {
+  total_score: {
     type: Number,
     // required: true,
   },
-  alternatives: [
+  quiz: [
     {
-      answer_correct: {
-        type: Boolean,
-        required: false,
-      },
+      alternatives: [
+        {
+          answer_correct: {
+            type: Boolean,
+            required: false,
+          },
+        },
+      ],
     },
   ],
 });
 
-module.exports = mongoose.model('Result', results);
+module.exports = mongoose.model('Result', ResultsSchema);

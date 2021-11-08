@@ -8,6 +8,7 @@ const QuestionSchema = new Schema({
   },
   id_exam: {
     type: String,
+    unique: true,
     // required: true,
   },
   exam_date_db: {
@@ -78,6 +79,12 @@ const QuestionSchema = new Schema({
           },
         },
       ],
+    },
+  ],
+  results: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Result',
     },
   ],
 });
