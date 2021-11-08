@@ -36,7 +36,7 @@ const ResultsSchema = new Schema({
   },
   total_score: {
     type: Number,
-    // required: true,
+    default: 0,
   },
   quiz: [
     {
@@ -45,6 +45,10 @@ const ResultsSchema = new Schema({
           answer_correct: {
             type: Boolean,
             required: false,
+          },
+          answer_choosen: {
+            type: Boolean,
+            default: false,
           },
         },
       ],
