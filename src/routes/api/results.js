@@ -64,7 +64,7 @@ router.post('/', verifyToken, async (req, res) => {
           } else
             return res.json({
               success: false,
-              message: 'Student who took this test',
+              message: 'The test must only be taken once',
             });
         })
         .catch((error) => {});
