@@ -61,7 +61,11 @@ router.post('/', verifyToken, async (req, res) => {
               .catch((err) => {
                 return res.status(500).json({ err });
               });
-          } else return res.json({ message: 'Hoc sinh đã làm bài này rồi' });
+          } else
+            return res.json({
+              success: false,
+              message: 'Student who took this test',
+            });
         })
         .catch((error) => {});
     })
