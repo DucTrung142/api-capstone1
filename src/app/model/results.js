@@ -50,6 +50,9 @@ const ResultsSchema = new Schema({
             type: Boolean,
             default: false,
           },
+          answer_content: {
+            type: String,
+          },
         },
       ],
     },

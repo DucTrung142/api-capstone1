@@ -47,16 +47,16 @@ router.post('/', verifyToken, async (req, res) => {
             newResult
               .save()
               .then((result) => {
-                // Question.findOne(
-                //   { id_exam: newResult.id_exam },
-                //   (err, question) => {
-                //     if (question) {
-                //       question.results.push(newResult);
-                //       question.save();
-                return res.json({ message: 'success', result });
-                //     }
-                //   }
-                // );
+                Question.findOne(
+                  { id_exam: newResult.id_exam },
+                  (err, question) => {
+                    if (question) {
+                      question.results.push(newResult);
+                      question.save();
+                      return res.json({ message: 'success', result });
+                    }
+                  }
+                );
               })
               .catch((err) => {
                 return res.status(500).json({ err });
