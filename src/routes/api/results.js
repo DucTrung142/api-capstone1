@@ -43,7 +43,6 @@ router.post('/', verifyToken, async (req, res) => {
               total_score,
               quiz: req.body.quiz,
             });
-
             newResult
               .save()
               .then((result) => {
@@ -72,42 +71,6 @@ router.post('/', verifyToken, async (req, res) => {
     .catch((error) => {
       res.status(500).json({ error });
     });
-
-  // console.log(req.body);
-  // await question.findOne(
-  //   { id_exam: req.body.id_exam },
-  //   {
-  //     $push: {
-  //       results: newResult,
-  //     },
-  // const newResult = new Result({
-
-  //   results{
-  //     id_exam: req.body.id_exam,
-  //   totalhourDb: req.body.totalhourDb,
-  //   totalminuteDb: req.body.totalminuteDb,
-  //   totalseconDb: req.body.totalseconDb,
-  //   hoursubmitDb: req.body.hoursubmitDb,
-  //   minutesubmitDb: req.body.minutesubmitDb,
-  //   secondsubmitDb: req.body.secondsubmitDb,
-  //   score_exam: req.body.score_exam,
-  //   // quiz: req.body.quiz,
-  //   alternatives: req.body.alternatives,
-  //   }
-  // });
-  // newResult.save()
-  // Question.findOneAndUpdate(
-  //   { id_exam: newResult.id_exam },
-  //   {
-  //     $push: {
-  //       results: {
-  //         id_exam: req.body.id_exam,
-  //         totalhourDb: req.body.totalhourDb,
-  //       },
-  //     },
-  //   }
-  // );
 });
-// });
 
 module.exports = router;

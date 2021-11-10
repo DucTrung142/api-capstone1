@@ -4,6 +4,7 @@ const verifyToken = require('../../middleware/verifyToken');
 
 //include our model
 const Question = require('../../app/model/question');
+const results = require('../../app/model/results');
 
 //get all quiz questions
 router.get('/question', verifyToken, async (req, res) => {
@@ -40,6 +41,18 @@ router.get('/examtopic/:id', async (req, res) => {
   } catch (error) {
     return res.status(500).json({ error: error });
   }
+});
+
+//get result question
+router.get('/result/:id', async (req, res) => {
+  Question.findOne({ id_exam: req.params.id })
+    .populate('results')
+    .then((result) => {
+      res.json(result);
+    })
+    .catch((error) => {
+      res.status(500).json({ error });
+    });
 });
 
 //create one quiz question
