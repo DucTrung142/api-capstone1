@@ -4,7 +4,6 @@ const verifyToken = require('../../middleware/verifyToken');
 
 //include our model
 const Question = require('../../app/model/question');
-const results = require('../../app/model/results');
 
 //get all quiz questions
 router.get('/question', verifyToken, async (req, res) => {
