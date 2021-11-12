@@ -81,43 +81,37 @@ router.get('/result/:id', verifyToken, async (req, res) => {
 });
 
 //create one quiz question
-router.post(
-  '/question/',
-  verifyToken,
-  authenticateRole(['A', 'T']),
-  async (req, res) => {
-    console.log(req);
-    const newQuestion = new Question({
-      id_user: req.user.id,
-      id_exam: req.body.id_exam,
-      exam_date_db: req.body.exam_date_db,
-      exam_topic_db: req.body.exam_topic_db,
-      hourOpenDb: req.body.hourOpenDb,
-      minuteOpenDb: req.body.minuteOpenDb,
-      secondOpenDb: req.body.secondOpenDb,
-      hourDueDb: req.body.hourDueDb,
-      minuteDueDb: req.body.minuteDueDb,
-      secondDueDb: req.body.secondDueDb,
-      totalQuestionDb: req.body.totalQuestionDb,
-      totalScoreDb: req.body.totalScoreDb,
-      quiz: req.body.quiz,
-      name_question: req.body.name_question,
-      question_type: req.body.question_type,
-      question_content: req.body.question_content,
-      point_question: req.body.point_question,
-      alternatives: req.body.alternatives,
-    });
-    try {
-      const saveQuestion = await newQuestion.save();
+router.post('/question/', verifyToken, async (req, res) => {
+  const newQuestion = new Question({
+    id_user: req.user.id,
+    id_exam: req.body.id_exam,
+    exam_date_db: req.body.exam_date_db,
+    exam_topic_db: req.body.exam_topic_db,
+    hourOpenDb: req.body.hourOpenDb,
+    minuteOpenDb: req.body.minuteOpenDb,
+    secondOpenDb: req.body.secondOpenDb,
+    hourDueDb: req.body.hourDueDb,
+    minuteDueDb: req.body.minuteDueDb,
+    secondDueDb: req.body.secondDueDb,
+    totalQuestionDb: req.body.totalQuestionDb,
+    totalScoreDb: req.body.totalScoreDb,
+    quiz: req.body.quiz,
+    name_question: req.body.name_question,
+    question_type: req.body.question_type,
+    question_content: req.body.question_content,
+    point_question: req.body.point_question,
+    alternatives: req.body.alternatives,
+  });
+  try {
+    const saveQuestion = await newQuestion.save();
 
-      res.json({
-        question: saveQuestion,
-      });
-    } catch (error) {
-      res.json({ message: error });
-    }
+    res.json({
+      question: saveQuestion,
+    });
+  } catch (error) {
+    res.json({ message: error });
   }
-);
+});
 
 //update one quiz question
 router.patch(
