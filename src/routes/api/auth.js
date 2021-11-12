@@ -36,12 +36,19 @@ router.post('/register', async (req, res) => {
     fullname: req.body.fullname,
     phone: req.body.phone,
     birthday: req.body.birthday,
+    user_type: req.body.user_type,
   });
   try {
     const savedUser = await newUser.save();
 
     // Create and assign a token
-    const token = jwt.sign({ _id: savedUser._id }, process.env.TOKEN_SECRET);
+    const token = jwt.sign(
+      {
+        _id: savedUser._id,
+        user_type: savedUser.user_type,
+      },
+      process.env.TOKEN_SECRET
+    );
     res.header('auth-token', token).json({
       jwt: token,
       User: {
@@ -51,6 +58,7 @@ router.post('/register', async (req, res) => {
         phone: savedUser.phone,
         birthday: savedUser.birthday,
         avatarUrl: '',
+        user_type: savedUser.user_type,
       },
     });
   } catch (error) {
@@ -90,7 +98,17 @@ router.post('/login', async (req, res) => {
       return res.json({ sucess: false, message: 'Password is incorrect!' });
 
     //create and assign a token
-    const token = jwt.sign({ id: user._id }, process.env.TOKEN_SECRET);
+    const token = jwt.sign(
+      {
+        id: user._id,
+        user_type: user.user_type,
+        username: user.username,
+        fullname: user.fullname,
+        phone: user.phone,
+        birthday: user.birthday,
+      },
+      process.env.TOKEN_SECRET
+    );
     res.header('auth-token', token).json({
       jwt: token,
       user: {
@@ -100,6 +118,7 @@ router.post('/login', async (req, res) => {
         phone: user.phone,
         birthday: user.birthday,
         avatarUrl: user.avatarUrl,
+        user_type: user.user_type,
       },
     });
   } catch (error) {

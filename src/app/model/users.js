@@ -23,6 +23,10 @@ const UserSchema = new Schema({
     type: String,
     required: true,
   },
+  user_type: {
+    type: String,
+    default: 'S',
+  },
   date: {
     type: Date,
     default: Date.now,

@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const verifyToken = require('../../middleware/verifyToken');
+const authenticateRole = require('../../middleware/authenUser');
 
 //include our model
 const Result = require('../../app/model/results');
@@ -33,6 +34,10 @@ router.post('/', verifyToken, async (req, res) => {
             }
             const newResult = new Result({
               id_user: req.user.id,
+              username: req.user.username,
+              fullname: req.user.fullname,
+              phone: req.user.phone,
+              birthday: req.user.birthday,
               id_exam: req.body.id_exam,
               totalhourDb: req.body.totalhourDb,
               totalminuteDb: req.body.totalminuteDb,

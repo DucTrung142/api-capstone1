@@ -3,6 +3,7 @@ const router = express.Router();
 const verifyToken = require('../../middleware/verifyToken');
 const User = require('../../app//model/users');
 const bcrypt = require('bcrypt');
+const authenticateRole = require('../../middleware/authenUser');
 
 //UPDATE ACCOUNT
 router.patch('/:userId', verifyToken, async (req, res) => {
