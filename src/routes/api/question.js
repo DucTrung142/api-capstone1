@@ -24,18 +24,23 @@ router.get(
 );
 
 //get one quiz question
-router.get('/question/:id', verifyToken, async (req, res) => {
-  try {
-    const id = req.params.id;
-    console.log(id);
-    const question = await Question.findOne({ id_exam: id });
-    res.status(200).json({
-      question: question,
-    });
-  } catch (error) {
-    return res.status(500).json({ error: error });
+router.get(
+  '/question/:id',
+  verifyToken,
+  authenticateRole(['A', 'S']),
+  async (req, res) => {
+    try {
+      const id = req.params.id;
+      console.log(id);
+      const question = await Question.findOne({ id_exam: id });
+      res.status(200).json({
+        question: question,
+      });
+    } catch (error) {
+      return res.status(500).json({ error: error });
+    }
   }
-});
+);
 
 //get exam on topic
 router.get('/examtopic/:id', authenticateRole(['A', 'T']), async (req, res) => {
