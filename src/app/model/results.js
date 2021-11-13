@@ -54,6 +54,10 @@ const ResultsSchema = new Schema({
     {
       alternatives: [
         {
+          answer_content: {
+            type: String,
+            required: false,
+          },
           answer_correct: {
             type: Boolean,
             required: false,
