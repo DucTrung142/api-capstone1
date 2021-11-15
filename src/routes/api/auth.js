@@ -45,7 +45,6 @@ router.post('/register', async (req, res) => {
     const token = jwt.sign(
       {
         _id: savedUser._id,
-        user_type: savedUser.user_type,
       },
       process.env.TOKEN_SECRET
     );
