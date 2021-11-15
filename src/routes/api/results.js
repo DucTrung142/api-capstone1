@@ -41,7 +41,7 @@ router.post(
             id_exam: req.body.id_exam,
             totalhourDb: req.body.totalhourDb,
             totalminuteDb: req.body.totalminuteDb,
-            totalseconDb: req.body.totalseconDb,
+            totalsecondDb: req.body.totalsecondDb,
             hoursubmitDb: req.body.hoursubmitDb,
             minutesubmitDb: req.body.minutesubmitDb,
             secondsubmitDb: req.body.secondsubmitDb,
