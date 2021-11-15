@@ -30,7 +30,7 @@ const ResultsSchema = new Schema({
     type: String,
     // required:true,
   },
-  totalseconDb: {
+  totalsecondDb: {
     type: String,
     // required:true,
   },
@@ -54,10 +54,6 @@ const ResultsSchema = new Schema({
     {
       alternatives: [
         {
-          answer_content: {
-            type: String,
-            required: false,
-          },
           answer_correct: {
             type: Boolean,
             required: false,
