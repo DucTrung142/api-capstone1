@@ -52,6 +52,18 @@ const ResultsSchema = new Schema({
   },
   quiz: [
     {
+      question_type: {
+        type: String,
+      },
+      question_content: {
+        type: String,
+        // required: true,
+      },
+      point_question: {
+        type: Number,
+        // required: true,
+      },
+
       alternatives: [
         {
           answer_correct: {
