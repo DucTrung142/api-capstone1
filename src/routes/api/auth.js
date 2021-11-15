@@ -13,7 +13,7 @@ router.post('/register', async (req, res) => {
   // Validation the data before
   const { error } = registerValidation.validate(req.body);
   if (error)
-    return res.json({
+    return res.status(400).json({
       sucess: false,
       message: error.details[0].message,
     });
