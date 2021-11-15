@@ -30,7 +30,9 @@ router.post(
                 }
               }
             }
-            total_score += boolean ? parseFloat(element.point_question) : 0;
+            total_score += boolean
+              ? parseFloat(element.point_question).toFixed(1)
+              : 0;
           }
           const newResult = new Result({
             id_user: req.user.id,
