@@ -8,7 +8,7 @@ router.post('/file', upload.single('file'), async (req, res) => {
   try {
     const result = await cloudinary.uploader.upload(req.file.path, {
       folder: 'file-uploader',
-      flags: 'attachment:pretty_flower',
+      // flags: 'attachment:pretty_flower',
     });
     res.status(200).json({
       name: req.file.originalname,
