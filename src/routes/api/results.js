@@ -79,10 +79,23 @@ router.post(
   }
 );
 
+router.get('/:id/:id_exam', async (req, res) => {
+  try {
+    const id = req.params.id;
+    const id_exam = req.params.id_exam;
+    const result = await Result.find({ id_user: id, id_exam: id_exam });
+    res.status(200).json({
+      result: result,
+    });
+  } catch (error) {
+    return res.status(500).json({ error: error });
+  }
+});
+
 router.get('/:id', async (req, res) => {
   try {
     const id = req.params.id;
-    const result = await Result.find({ id_exam: id });
+    const result = await Result.find({ id_user: id });
     res.status(200).json({
       result: result,
     });
