@@ -79,4 +79,16 @@ router.post(
   }
 );
 
+router.get('/:id', async (req, res) => {
+  try {
+    const id = req.params.id;
+    const result = await Result.find({ id_exam: id });
+    res.status(200).json({
+      result: result,
+    });
+  } catch (error) {
+    return res.status(500).json({ error: error });
+  }
+});
+
 module.exports = router;
