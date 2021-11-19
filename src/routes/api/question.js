@@ -7,6 +7,7 @@ const authenticateRole = require('../../middleware/authenUser');
 const Question = require('../../app/model/question');
 const Users = require('../../app/model/users');
 const Results = require('../../app/model/results');
+const results = require('../../app/model/results');
 //get all quiz questions
 router.get(
   '/question',
@@ -67,6 +68,21 @@ router.get('/result/:id', verifyToken, async (req, res) => {
   Question.findOne({ id_exam: req.params.id })
     .populate('results')
     .then(async (result) => {
+      res.json(result);
+    })
+    .catch((error) => {
+      console.log(error.toString());
+      res.status(500).json({ error });
+    });
+});
+
+router.get('/results/:id_exam/:id_user', async (req, res) => {
+  Question.findOne({ id_exam: req.params.id_exam })
+    .populate({
+      path: 'results',
+      match: { id_user: req.params.id_user },
+    })
+    .then((result) => {
       res.json(result);
     })
     .catch((error) => {
