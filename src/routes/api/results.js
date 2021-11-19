@@ -79,7 +79,7 @@ router.post(
   }
 );
 
-router.get('/:id/:id_exam', async (req, res) => {
+router.get('/:id_exam/:id', async (req, res) => {
   try {
     const id = req.params.id;
     const id_exam = req.params.id_exam;
