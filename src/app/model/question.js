@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const QuestionSchema = new Schema({
   id_user: {
-    type: mongoose.Types.ObjectId,
+    type: String,
     ref: 'User',
   },
   id_exam: {

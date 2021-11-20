@@ -52,6 +52,34 @@ router.get('/examtopic/:id', authenticateRole(['A', 'T']), async (req, res) => {
   }
 });
 
+router.get(
+  '/examtopic',
+  verifyToken,
+  authenticateRole(['A', 'T']),
+  async (req, res) => {
+    try {
+      const questions = await Question.aggregate([
+        {
+          $match: { id_user: req.user.id },
+        },
+        {
+          $group: {
+            _id: {
+              exam_topic_db: '$exam_topic_db',
+            },
+            quiz: { $addToSet: '$quiz' },
+
+            // count: { $sum: 1 },
+          },
+        },
+      ]);
+      return res.status(200).json(questions);
+    } catch (error) {
+      return res.status(500).json({ error: error });
+    }
+  }
+);
+
 //get result question
 router.get('/result/:id', verifyToken, async (req, res) => {
   // console.log(req.user);
