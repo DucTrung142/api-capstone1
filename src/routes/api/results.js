@@ -10,9 +10,10 @@ const Question = require('../../app/model/question');
 router.post(
   '/',
   verifyToken,
-  authenticateRole(['A', 'S']),
+  // authenticateRole(['A', 'S']),
   async (req, res) => {
     const { id_exam, totalhourDb } = req.body;
+
     Result.findOne({ id_user: req.user.id, id_exam })
       .then((result) => {
         if (!result) {
@@ -30,9 +31,7 @@ router.post(
                 }
               }
             }
-            total_score += boolean
-              ? parseFloat(element.point_question).toFixed(1)
-              : 0;
+            total_score += boolean ? parseFloat(element.point_question) : 0;
           }
           const newResult = new Result({
             id_user: req.user.id,
