@@ -73,6 +73,13 @@ router.get(
           },
         },
       ]);
+      for (let element of questions) {
+        let arr = [];
+        for (let myArr of element.quiz) {
+          arr = arr.concat(myArr);
+        }
+        element.quiz = arr;
+      }
       return res.status(200).json(questions);
     } catch (error) {
       return res.status(500).json({ error: error });
