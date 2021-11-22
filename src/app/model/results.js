@@ -46,6 +46,18 @@ const ResultsSchema = new Schema({
     type: String,
     // required:true,
   },
+  hoursStart: {
+    type: String,
+    // required:true,
+  },
+  minutesStart: {
+    type: String,
+    // required:true,
+  },
+  secondsStart: {
+    type: String,
+    // required:true,
+  },
   total_score: {
     type: Number,
     default: 0,
@@ -74,7 +86,7 @@ const ResultsSchema = new Schema({
             type: Boolean,
             default: false,
           },
-          answer_content: {
+          essay_answer_content: {
             type: String,
           },
         },

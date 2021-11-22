@@ -46,6 +46,9 @@ router.post(
             hoursubmitDb: req.body.hoursubmitDb,
             minutesubmitDb: req.body.minutesubmitDb,
             secondsubmitDb: req.body.secondsubmitDb,
+            hoursStart: req.body.hoursStart,
+            minutesStart: req.body.minutesStart,
+            secondsStart: req.body.secondsStart,
             total_score,
             quiz: req.body.quiz,
           });
