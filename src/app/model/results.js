@@ -86,6 +86,9 @@ const ResultsSchema = new Schema({
             type: Boolean,
             default: false,
           },
+          answer_content: {
+            type: String,
+          },
           essay_answer_content: {
             type: String,
           },

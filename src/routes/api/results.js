@@ -106,4 +106,12 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+router.patch('/result',async(req,res)=>{
+  try {
+    
+  } catch (error) {
+    
+  }
+})
+
 module.exports = router;
