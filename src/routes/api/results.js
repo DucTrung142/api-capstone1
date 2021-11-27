@@ -10,7 +10,7 @@ const Question = require('../../app/model/question');
 router.post(
   '/',
   verifyToken,
-  // authenticateRole(['A', 'S']),
+  authenticateRole(['A', 'S']),
   async (req, res) => {
     const { id_exam, totalhourDb } = req.body;
 
@@ -106,12 +106,9 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-router.patch('/result',async(req,res)=>{
+router.patch('/result', async (req, res) => {
   try {
-    
-  } catch (error) {
-    
-  }
-})
+  } catch (error) {}
+});
 
 module.exports = router;
