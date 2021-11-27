@@ -160,7 +160,7 @@ router.post(
       });
     } catch (error) {
       res.json({
-        success: true,
+        success: false,
         message: error,
       });
     }
