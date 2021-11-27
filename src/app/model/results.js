@@ -77,6 +77,7 @@ const ResultsSchema = new Schema({
       },
       essay_score: {
         type: Number,
+        default: '',
       },
 
       alternatives: [
