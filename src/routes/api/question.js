@@ -159,7 +159,10 @@ router.post(
         question: saveQuestion,
       });
     } catch (error) {
-      res.json({ message: error });
+      res.json({
+        success: true,
+        message: error,
+      });
     }
   }
 );
