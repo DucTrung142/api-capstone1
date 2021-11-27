@@ -6,6 +6,7 @@ const authenticateRole = require('../../middleware/authenUser');
 //include our model
 const Result = require('../../app/model/results');
 const Question = require('../../app/model/question');
+const { request } = require('express');
 //create one quiz question
 router.post(
   '/',
@@ -111,40 +112,23 @@ router.patch('/:id_exam/:id_user', async (req, res) => {
   try {
     const id_exam = req.params.id_exam;
     const id_user = req.params.id_user;
-    console.log(id_exam);
-    console.log(id_user);
+    let { quiz, total_score } = req.body;
+    for (const iterator of quiz) {
+      if (iterator.essay_score >= 0) total_score += iterator.essay_score;
+    }
+
     const updateResult = await Result.findOneAndUpdate(
       {
         id_exam: id_exam,
         id_user: id_user,
       },
-      req.body,
-
-      { new: true },
-      (element) => {
-        if (!element) {
-          let { quiz, total_score } = req.body;
-
-          for (const iterator of quiz) {
-            if (iterator.essay_score >= 0) total_score += iterator.essay_score;
-          }
-
-          console.log(total_score);
-        }
-      }
+      { total_score },
+      { new: true }
     );
-    // updateResult.quiz.map((element) => {
-    //   console.log(element);
-    // });
-    // var total = 0;
-    // for (let iterator of updateResult.quiz) {
-    //   if (iterator.essay_score) total += iterator.essay_score;
-    // }
-    // updateResult.total_score += total;
-
     res.json(updateResult);
   } catch (error) {
-    return res.status(500).json({ error: error });
+    console.log(error.toString());
+    return res.status(500).json({ error: error.toString() });
   }
 });
 

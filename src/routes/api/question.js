@@ -161,8 +161,9 @@ router.post(
     } catch (error) {
       res.json({
         success: false,
-        message: error,
+        message: error.message,
       });
+      console.log(error);
     }
   }
 );
