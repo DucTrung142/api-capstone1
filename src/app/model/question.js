@@ -9,63 +9,63 @@ const QuestionSchema = new Schema({
   id_exam: {
     type: String,
     unique: true,
-    // required: true,
+    required: true,
   },
   exam_date_db: {
     type: Date,
   },
   exam_topic_db: {
     type: String,
-    // required: true,
+    required: true,
   },
   hourOpenDb: {
     type: String,
-    // required:true,
+    required: true,
   },
   minuteOpenDb: {
     type: String,
-    // required:true,
+    required: true,
   },
   secondOpenDb: {
     type: String,
-    // required:true,
+    required: true,
   },
   hourDueDb: {
     type: String,
-    // required:true,
+    required: true,
   },
   minuteDueDb: {
     type: String,
-    // required:true,
+    required: true,
   },
   secondDueDb: {
     type: String,
-    // required:true,
+    required: true,
   },
   totalQuestionDb: {
     type: Number,
-    // required: true,
+    required: true,
   },
   totalScoreDb: {
     type: Number,
-    // required: true,
+    required: true,
   },
   quiz: [
     {
       name_question: {
         type: Number,
-        // required: true,
+        required: true,
       },
       question_type: {
         type: String,
       },
       question_content: {
         type: String,
-        // required: true,
+        required: true,
       },
       point_question: {
         type: Number,
-        // required: true,
+        required: true,
       },
       alternatives: [
         {
