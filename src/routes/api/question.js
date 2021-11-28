@@ -130,7 +130,7 @@ router.get('/results/:id_exam/:id_user', async (req, res) => {
 router.post(
   '/question/',
   verifyToken,
-  authenticateRole(['A', 'T']),
+  // authenticateRole(['A', 'T']),
   async (req, res) => {
     const newQuestion = new Question({
       id_user: req.user.id,
@@ -159,9 +159,9 @@ router.post(
         question: saveQuestion,
       });
     } catch (error) {
-      res.json({
+      res.status(401).json({
         success: false,
-        message: error.message,
+        message: error.toString(),
       });
       console.log(error);
     }

@@ -53,7 +53,6 @@ const QuestionSchema = new Schema({
     {
       name_question: {
         type: Number,
-        required: true,
       },
       question_type: {
         type: String,
