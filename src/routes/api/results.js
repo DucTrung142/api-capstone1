@@ -126,7 +126,6 @@ router.patch('/:id_exam/:id_user', async (req, res) => {
       { total_score },
       { new: true }
     );
-    updateResult.quiz.map();
     res.json(updateResult);
   } catch (error) {
     console.log(error.toString());
