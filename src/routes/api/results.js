@@ -7,6 +7,7 @@ const authenticateRole = require('../../middleware/authenUser');
 const Result = require('../../app/model/results');
 const Question = require('../../app/model/question');
 const { request } = require('express');
+
 //create one quiz question
 router.post(
   '/',
@@ -113,6 +114,18 @@ router.patch('/:id_exam/:id_user', async (req, res) => {
   try {
     const id_exam = req.params.id_exam;
     const id_user = req.params.id_user;
+
+    await Result.findOneAndUpdate(
+      {
+        id_exam: id_exam,
+        id_user: id_user,
+      },
+      req.body,
+      {
+        new: true,
+      }
+    );
+
     let { quiz, total_score } = req.body;
     for (const iterator of quiz) {
       if (iterator.essay_score >= 0) total_score += iterator.essay_score;
@@ -123,9 +136,13 @@ router.patch('/:id_exam/:id_user', async (req, res) => {
         id_exam: id_exam,
         id_user: id_user,
       },
-      { total_score },
+      {
+        total_score,
+      },
+
       { new: true }
     );
+
     res.json(updateResult);
   } catch (error) {
     console.log(error.toString());
