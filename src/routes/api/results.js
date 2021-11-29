@@ -146,7 +146,7 @@ router.patch('/:id_exam/:id_user', async (req, res) => {
     res.json(updateResult);
   } catch (error) {
     console.log(error.toString());
-    return res.status(500).json({ error: error.toString() });
+    return res.status(400).json({ error: error.toString() });
   }
 });
 
