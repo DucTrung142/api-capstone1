@@ -129,12 +129,17 @@ router.patch('/:id_exam/:id_user', async (req, res) => {
       }
     );
 
-    let { result, total_score } = req.body;
+    let { results, total_score } = req.body;
     // console.log(result.quiz);
-    for (const iterator of result.quiz) {
-      if (iterator.essay_score >= 0) result.total_score += iterator.essay_score;
+
+    for (const arrofquiz of results) {
+      for (const iterator of arrofquiz.quiz) {
+        if (iterator.essay_score >= 0)
+          arrofquiz.total_score += iterator.essay_score;
+      }
+      total_score = arrofquiz.total_score;
     }
-    total_score = result.total_score;
+
     const updateResult = await Result.findOneAndUpdate(
       {
         id_exam: id_exam,
