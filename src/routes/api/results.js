@@ -53,7 +53,6 @@ router.post(
             secondsStart: req.body.secondsStart,
             total_score,
             quiz: req.body.quiz,
-            essay_score: '',
           });
           newResult
             .save()
