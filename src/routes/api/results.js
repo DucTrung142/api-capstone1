@@ -88,9 +88,13 @@ router.get('/:id_exam/:id', async (req, res) => {
   try {
     const id = req.params.id;
     const id_exam = req.params.id_exam;
-    const result = await Result.find({ id_user: id, id_exam: id_exam });
+    const results = await Result.find({ id_user: id, id_exam: id_exam });
+    let result = [];
+    for (const iterator of results) {
+      result = iterator;
+    }
     res.status(200).json({
-      result: result,
+      result,
     });
   } catch (error) {
     return res.status(500).json({ error: error });
