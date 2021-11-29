@@ -106,7 +106,7 @@ router.get('/:id', async (req, res) => {
     const id = req.params.id;
     const result = await Result.find({ id_user: id });
     res.status(200).json({
-      result: result,
+      result,
     });
   } catch (error) {
     return res.status(500).json({ error: error });
@@ -130,11 +130,12 @@ router.patch('/:id_exam/:id_user', async (req, res) => {
       }
     );
 
-    let { quiz, total_score } = req.body;
-    for (const iterator of quiz) {
-      if (iterator.essay_score >= 0) total_score += iterator.essay_score;
+    let { result, total_score } = req.body;
+    // console.log(result.quiz);
+    for (const iterator of result.quiz) {
+      if (iterator.essay_score >= 0) result.total_score += iterator.essay_score;
     }
-
+    total_score = result.total_score;
     const updateResult = await Result.findOneAndUpdate(
       {
         id_exam: id_exam,
