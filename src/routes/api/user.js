@@ -25,6 +25,7 @@ router.patch('/:userId', verifyToken, async (req, res) => {
       id: updatedUser._id,
       username: updatedUser.username,
       fullname: updatedUser.fullname,
+      user_type: updatedUser.user_type,
 
       phone: updatedUser.phone || '',
       birthday: updatedUser.birthday || '',
@@ -41,6 +42,7 @@ router.get('/:userId', verifyToken, async (req, res) => {
       id: user._id,
       username: user.username,
       fullname: user.fullname,
+      user_type: user.user_type,
 
       phone: user.phone || '',
       birthday: user.birthday || '',

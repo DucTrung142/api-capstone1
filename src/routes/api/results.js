@@ -12,7 +12,7 @@ const { request } = require('express');
 router.post(
   '/',
   verifyToken,
-  authenticateRole(['A', 'S']),
+  authenticateRole(['Admin', 'Student']),
   async (req, res) => {
     const { id_exam, totalhourDb } = req.body;
 

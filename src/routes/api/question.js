@@ -12,7 +12,7 @@ const results = require('../../app/model/results');
 router.get(
   '/question',
   verifyToken,
-  authenticateRole(['A', 'T']),
+  authenticateRole(['Admin', 'Teacher']),
   async (req, res) => {
     try {
       // console.log(req.user);
@@ -39,23 +39,27 @@ router.get('/question/:id', verifyToken, async (req, res) => {
 });
 
 //get exam on topic
-router.get('/examtopic/:id', authenticateRole(['A', 'T']), async (req, res) => {
-  try {
-    const topic = req.params.id;
-    console.log(req.params.id);
-    const exam_topic = await Question.find({ exam_topic_db: topic });
-    res.status(200).json({
-      exam_topic,
-    });
-  } catch (error) {
-    return res.status(500).json({ error: error });
+router.get(
+  '/examtopic/:id',
+  authenticateRole(['Admin', 'Teacher']),
+  async (req, res) => {
+    try {
+      const topic = req.params.id;
+      console.log(req.params.id);
+      const exam_topic = await Question.find({ exam_topic_db: topic });
+      res.status(200).json({
+        exam_topic,
+      });
+    } catch (error) {
+      return res.status(500).json({ error: error });
+    }
   }
-});
+);
 
 router.get(
   '/examtopic',
   verifyToken,
-  authenticateRole(['A', 'T']),
+  authenticateRole(['Admin', 'Teacher']),
   async (req, res) => {
     try {
       const questions = await Question.aggregate([
@@ -130,7 +134,7 @@ router.get('/results/:id_exam/:id_user', async (req, res) => {
 router.post(
   '/question/',
   verifyToken,
-  // authenticateRole(['A', 'T']),
+  authenticateRole(['Admin', 'Teacher']),
   async (req, res) => {
     const newQuestion = new Question({
       id_user: req.user.id,
@@ -172,7 +176,7 @@ router.post(
 router.patch(
   '/question/:id',
   verifyToken,
-  authenticateRole(['A', 'T']),
+  authenticateRole(['Admin', 'Teacher']),
   async (req, res) => {
     try {
       const id = req.params.id;
@@ -196,7 +200,7 @@ router.patch(
 router.delete(
   '/question/:id',
   verifyToken,
-  authenticateRole(['A', 'T']),
+  authenticateRole(['Admin', 'Teacher']),
   async (req, res) => {
     try {
       const id_exam = req.params.id;
