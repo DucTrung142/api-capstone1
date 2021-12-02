@@ -161,18 +161,12 @@ router.patch('/one-exam/:id_exam/:id_user', async (req, res) => {
         new: true,
       }
     );
-    console.log(req.body);
-    let { results, total_score } = req.body;
-    // console.log(result.quiz);
 
-    for (const arrofquiz of results) {
-      for (const iterator of arrofquiz.quiz) {
-        if (iterator.essay_score >= 0)
-          arrofquiz.total_score += iterator.essay_score;
-      }
-      total_score = arrofquiz.total_score;
+    let { quiz, total_score } = req.body;
+    for (const iterator of quiz) {
+      if (iterator.essay_score >= 0) total_score += iterator.essay_score;
     }
-
+    console.log(total_score);
     const updateResult = await Result.findOneAndUpdate(
       {
         id_exam: id_exam,
@@ -181,10 +175,8 @@ router.patch('/one-exam/:id_exam/:id_user', async (req, res) => {
       {
         total_score,
       },
-
       { new: true }
     );
-
     res.json(updateResult);
   } catch (error) {
     console.log(error.toString());
