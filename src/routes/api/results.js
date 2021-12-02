@@ -83,7 +83,7 @@ router.post(
   }
 );
 
-router.get('/:id_exam/:id', async (req, res) => {
+router.get('/one-exam/:id_exam/:id', async (req, res) => {
   try {
     const id = req.params.id;
     const id_exam = req.params.id_exam;
@@ -100,7 +100,7 @@ router.get('/:id_exam/:id', async (req, res) => {
   }
 });
 
-router.get('/:id', async (req, res) => {
+router.get('/user/:id', async (req, res) => {
   try {
     const id = req.params.id;
     const result = await Result.find({ id_user: id });
@@ -112,8 +112,41 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+//get score for id_exam
+router.get('/score', async (req, res) => {
+  try {
+    var id_exam = req.params.id_exam;
+    // let scoreResult = await Result.find({ id_exam: id_exam });
+
+    // let statistics = {};
+    // for (let i = 0; i < scoreResult.length; i++) {
+    //   const score = scoreResult[i].total_score;
+    //   console.log(score);
+    //   statistics[score] =
+    //     statistics[score] === undefined ? 1 : statistics[score] + 1;
+    // }
+    // console.log(scoreResult);
+    const scoreResult = await Result.aggregate([
+      // {
+      //   // $match: { id_exam: scoreResult.id_exam },
+      // },
+      {
+        $group: {
+          _id: {
+            total_score: '$total_score',
+          },
+          count: { $sum: 1 },
+        },
+      },
+    ]);
+    res.json(scoreResult);
+  } catch (error) {
+    res.status(500).json({ error: error });
+  }
+});
+
 //update one result
-router.patch('/:id_exam/:id_user', async (req, res) => {
+router.patch('/one-exam/:id_exam/:id_user', async (req, res) => {
   try {
     const id_exam = req.params.id_exam;
     const id_user = req.params.id_user;
@@ -128,7 +161,7 @@ router.patch('/:id_exam/:id_user', async (req, res) => {
         new: true,
       }
     );
-
+    console.log(req.body);
     let { results, total_score } = req.body;
     // console.log(result.quiz);
 
