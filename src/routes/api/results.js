@@ -113,23 +113,13 @@ router.get('/user/:id', async (req, res) => {
 });
 
 //get score for id_exam
-router.get('/score', async (req, res) => {
+router.get('/score/:id_exam', async (req, res) => {
   try {
-    var id_exam = req.params.id_exam;
-    // let scoreResult = await Result.find({ id_exam: id_exam });
-
-    // let statistics = {};
-    // for (let i = 0; i < scoreResult.length; i++) {
-    //   const score = scoreResult[i].total_score;
-    //   console.log(score);
-    //   statistics[score] =
-    //     statistics[score] === undefined ? 1 : statistics[score] + 1;
-    // }
-    // console.log(scoreResult);
-    const scoreResult = await Result.aggregate([
-      // {
-      //   // $match: { id_exam: scoreResult.id_exam },
-      // },
+    const id_exam = req.params.id_exam;
+    let scoreResult = await Result.aggregate([
+      {
+        $match: { id_exam: id_exam },
+      },
       {
         $group: {
           _id: {
@@ -138,8 +128,11 @@ router.get('/score', async (req, res) => {
           count: { $sum: 1 },
         },
       },
-    ]);
-    res.json(scoreResult);
+    ]).sort('_id.total_score');
+
+    res.json({
+      data: scoreResult,
+    });
   } catch (error) {
     res.status(500).json({ error: error });
   }
