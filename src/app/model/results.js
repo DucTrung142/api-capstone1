@@ -58,6 +58,9 @@ const ResultsSchema = new Schema({
     type: String,
     // required:true,
   },
+  old_point: {
+    type: Number,
+  },
   total_score: {
     type: Number,
     default: 0,

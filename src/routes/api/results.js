@@ -34,7 +34,9 @@ router.post(
               }
             }
             total_score += boolean ? parseFloat(element.point_question) : 0;
+            old_point = total_score;
           }
+
           const newResult = new Result({
             id_user: req.user.id,
             username: req.user.username,
@@ -52,6 +54,7 @@ router.post(
             minutesStart: req.body.minutesStart,
             secondsStart: req.body.secondsStart,
             total_score,
+            old_point,
             quiz: req.body.quiz,
           });
           newResult
@@ -155,10 +158,11 @@ router.patch('/one-exam/:id_exam/:id_user', async (req, res) => {
       }
     );
 
-    let { quiz, total_score } = req.body;
+    let { quiz, total_score, old_point } = req.body;
     for (const iterator of quiz) {
-      if (iterator.essay_score >= 0) total_score += iterator.essay_score;
+      if (iterator.essay_score >= 0) old_point += iterator.essay_score;
     }
+    total_score = old_point;
     console.log(total_score);
     const updateResult = await Result.findOneAndUpdate(
       {
