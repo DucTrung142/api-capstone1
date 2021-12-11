@@ -12,6 +12,21 @@ const loginValidation = Joi.object({
   username: Joi.string().min(6).max(30).required(),
   password: Joi.string().min(6).max(30).required(),
 });
+const questionValidation = Joi.object({
+  id_exam: Joi.required(),
+  exam_topic_db: Joi.required(),
+  hourOpenDb: Joi.required(),
+  minuteOpenDb: Joi.required(),
+  secondOpenDb: Joi.required(),
+  hourDueDb: Joi.required(),
+  minuteDueDb: Joi.required(),
+  secondDueDb: Joi.required(),
+  totalScoreDb: Joi.required(),
+  totalQuestionDb: Joi.number(),
+  quiz: Joi.required(),
+  results: Joi.required(),
+});
 
 module.exports.registerValidation = registerValidation;
 module.exports.loginValidation = loginValidation;
+module.exports.questionValidation = questionValidation;

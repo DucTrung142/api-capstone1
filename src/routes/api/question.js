@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const verifyToken = require('../../middleware/verifyToken');
 const authenticateRole = require('../../middleware/authenUser');
+const { questionValidation } = require('../../validation');
 
 //include our model
 const Question = require('../../app/model/question');
@@ -136,6 +137,12 @@ router.post(
   verifyToken,
   authenticateRole(['Admin', 'Teacher']),
   async (req, res) => {
+    const { error } = questionValidation.validate(req.body);
+    if (error)
+      return res.status(400).json({
+        success: false,
+        message: error.message,
+      });
     const newQuestion = new Question({
       id_user: req.user.id,
       id_exam: req.body.id_exam,
@@ -163,11 +170,7 @@ router.post(
         question: saveQuestion,
       });
     } catch (error) {
-      res.status(401).json({
-        success: false,
-        message: error.toString(),
-      });
-      console.log(error);
+      res.status(401).json(error);
     }
   }
 );
