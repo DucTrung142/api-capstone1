@@ -63,7 +63,7 @@ router.post('/register', async (req, res) => {
   } catch (error) {
     res.json({
       sucess: false,
-      message: 'ko duoc d ',
+      message: 'Can not be empty',
     });
   }
 });
