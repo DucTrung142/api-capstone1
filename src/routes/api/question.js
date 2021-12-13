@@ -137,12 +137,12 @@ router.post(
   verifyToken,
   authenticateRole(['Admin', 'Teacher']),
   async (req, res) => {
-    const { error } = questionValidation.validate(req.body);
-    if (error)
-      return res.status(400).json({
-        success: false,
-        message: error.message,
-      });
+    // const { error } = questionValidation.validate(req.body);
+    // if (error)
+    //   return res.status(400).json({
+    //     success: false,
+    //     message: error.message,
+    //   });
     const newQuestion = new Question({
       id_user: req.user.id,
       id_exam: req.body.id_exam,
@@ -170,7 +170,10 @@ router.post(
         question: saveQuestion,
       });
     } catch (error) {
-      res.status(401).json(error);
+      res.status(401).json({
+        success: false,
+        message: 'Can not be empty',
+      });
     }
   }
 );
