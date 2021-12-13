@@ -11,12 +11,12 @@ const { json } = require('express');
 //REGISTER
 router.post('/register', async (req, res) => {
   // Validation the data before
-  const { error } = registerValidation.validate(req.body);
-  if (error)
-    return res.status(400).json({
-      sucess: false,
-      message: error.message,
-    });
+  // const { error } = registerValidation.validate(req.body);
+  // if (error)
+  //   return res.status(400).json({
+  //     sucess: false,
+  //     message: error.message,
+  //   });
 
   //checking if the user is already in the database
   const userExist = await User.findOne({ username: req.body.username });
@@ -61,7 +61,10 @@ router.post('/register', async (req, res) => {
       },
     });
   } catch (error) {
-    res.json(error);
+    res.json({
+      sucess: false,
+      message: 'ko duoc d ',
+    });
   }
 });
 
