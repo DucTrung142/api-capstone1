@@ -148,7 +148,6 @@ router.post(
       hourDueDb: req.body.hourDueDb,
       minuteDueDb: req.body.minuteDueDb,
       secondDueDb: req.body.secondDueDb,
-      totalQuestionDb: req.body.totalQuestionDb,
       totalScoreDb: req.body.totalScoreDb,
       quiz: req.body.quiz,
       name_question: req.body.name_question,
