@@ -11,10 +11,12 @@ const { json } = require('express');
 //REGISTER
 router.post('/register', async (req, res) => {
   // Validation the data before
-  const { error } = await registerValidation.validate(req.body);
+  const { error } = registerValidation.validate(req.body);
+  console.log(req.body);
   if (error)
-    return res.status(400).json({
-      error: error,
+    return res.json({
+      sucess: false,
+      message: 'Can not be empty and greater than 6 characters',
     });
 
   //checking if the user is already in the database
@@ -22,7 +24,7 @@ router.post('/register', async (req, res) => {
   if (userExist)
     return res.json({
       sucess: false,
-      message: 'Username already exists',
+      message: error.details[0].message,
     });
 
   //hash password
@@ -62,8 +64,8 @@ router.post('/register', async (req, res) => {
   } catch (error) {
     res.json({
       error: error,
-      sucess: false,
-      message: 'Can not be empty and greater than 6 characters',
+      // sucess: false,
+      // message: 'Can not be empty and greater than 6 characters',
     });
   }
 });
