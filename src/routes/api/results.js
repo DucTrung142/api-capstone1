@@ -123,6 +123,14 @@ router.get(
   async (req, res) => {
     try {
       const id_exam = req.params.id_exam;
+      //checking if the user is already in the database
+      const id = await Result.findOne({ id_exam: req.body.id_exam });
+      if (id) {
+        return res.json({
+          success: false,
+          message: 'id not found',
+        });
+      }
       let scoreResult = await Result.aggregate([
         {
           $match: { id_exam: id_exam },
@@ -142,8 +150,7 @@ router.get(
       });
     } catch (error) {
       res.json({
-        success: false,
-        message: 'id not found',
+        error: error,
       });
     }
   }
