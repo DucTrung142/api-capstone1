@@ -165,7 +165,7 @@ router.post(
     } catch (error) {
       res.json({
         success: false,
-        error: 'Can not be empty',
+        message: 'Can not be empty',
       });
     }
   }
