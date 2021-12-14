@@ -25,6 +25,7 @@ const UserSchema = new Schema({
   },
   user_type: {
     type: String,
+    required: true,
   },
   date: {
     type: Date,

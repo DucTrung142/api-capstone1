@@ -137,7 +137,7 @@ router.get('/score/:id_exam', async (req, res) => {
       data: scoreResult,
     });
   } catch (error) {
-    res.status(500).json({
+    res.status(400).json({
       success: false,
       message: 'id not found',
     });
