@@ -14,8 +14,7 @@ router.post('/register', async (req, res) => {
   const { error } = await registerValidation.validate(req.body);
   if (error)
     return res.status(400).json({
-      sucess: false,
-      message: 'Can not be empty and greater than 6 characters ',
+      error: error,
     });
 
   //checking if the user is already in the database
@@ -63,8 +62,8 @@ router.post('/register', async (req, res) => {
   } catch (error) {
     res.json({
       error: error,
-      // sucess: false,
-      // message: 'Can not be empty',
+      sucess: false,
+      message: 'Can not be empty and greater than 6 characters',
     });
   }
 });
