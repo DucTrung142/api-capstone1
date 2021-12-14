@@ -170,7 +170,7 @@ router.post(
         question: saveQuestion,
       });
     } catch (error) {
-      res.status(400).json({
+      return res.status(400).json({
         success: false,
         message: 'Can not be empty',
       });
