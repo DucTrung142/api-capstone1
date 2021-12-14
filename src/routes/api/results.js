@@ -116,33 +116,38 @@ router.get('/user/:id', async (req, res) => {
 });
 
 //get score for id_exam
-router.get('/score/:id_exam', async (req, res) => {
-  try {
-    const id_exam = req.params.id_exam;
-    let scoreResult = await Result.aggregate([
-      {
-        $match: { id_exam: id_exam },
-      },
-      {
-        $group: {
-          _id: {
-            total_score: '$total_score',
-          },
-          count: { $sum: 1 },
+router.get(
+  '/score/:id_exam',
+  verifyToken,
+  authenticateRole(['Admin', 'Teacher']),
+  async (req, res) => {
+    try {
+      const id_exam = req.params.id_exam;
+      let scoreResult = await Result.aggregate([
+        {
+          $match: { id_exam: id_exam },
         },
-      },
-    ]).sort('_id.total_score');
+        {
+          $group: {
+            _id: {
+              total_score: '$total_score',
+            },
+            count: { $sum: 1 },
+          },
+        },
+      ]).sort('_id.total_score');
 
-    res.json({
-      data: scoreResult,
-    });
-  } catch (error) {
-    res.status(400).json({
-      success: false,
-      message: 'id not found',
-    });
+      res.json({
+        data: scoreResult,
+      });
+    } catch (error) {
+      res.json({
+        success: false,
+        message: 'id not found',
+      });
+    }
   }
-});
+);
 
 //update one result
 router.patch('/one-exam/:id_exam/:id_user', async (req, res) => {
