@@ -15,7 +15,7 @@ router.post('/register', async (req, res) => {
   if (error)
     return res.status(400).json({
       sucess: false,
-      message: error.details[0].message,
+      message: 'Can not be empty and greater than 6 characters ',
     });
 
   //checking if the user is already in the database
