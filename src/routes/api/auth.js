@@ -16,7 +16,7 @@ router.post('/register', async (req, res) => {
   if (error)
     return res.json({
       sucess: false,
-      message: 'Can not be empty and greater than 6 characters',
+      message: error.details[0].message,
     });
 
   //checking if the user is already in the database
@@ -24,7 +24,7 @@ router.post('/register', async (req, res) => {
   if (userExist)
     return res.json({
       sucess: false,
-      message: error.details[0].message,
+      message: 'Username already exists',
     });
 
   //hash password
