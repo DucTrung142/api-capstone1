@@ -16,7 +16,7 @@ const QuestionSchema = new Schema({
   },
   exam_topic_db: {
     type: String,
-    required: true,
+    // required: true,
   },
   hourOpenDb: {
     type: String,
@@ -44,7 +44,7 @@ const QuestionSchema = new Schema({
   },
   totalQuestionDb: {
     type: Number,
-    required: true,
+    // required: true,
   },
   totalScoreDb: {
     type: Number,
