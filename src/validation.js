@@ -7,7 +7,7 @@ const registerValidation = Joi.object({
   phone: Joi.string().min(9).max(11).pattern(new RegExp('^[0-9]')),
   birthday: Joi.date().min('1-1-1800').max('12-31-2021'),
   user_type: Joi.string().required(),
-  av,
+  avatarUrl: Joi.string(),
 });
 const loginValidation = Joi.object({
   username: Joi.string().min(6).max(30).required(),
