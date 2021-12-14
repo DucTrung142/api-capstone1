@@ -135,7 +135,7 @@ router.get('/results/:id_exam/:id_user', async (req, res) => {
 router.post(
   '/question/',
   verifyToken,
-  // authenticateRole(['Admin', 'Teacher']),
+  authenticateRole(['Admin', 'Teacher']),
   async (req, res) => {
     // const { error } = questionValidation.validate(req.body);
     // if (error)
