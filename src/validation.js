@@ -25,13 +25,15 @@ const questionValidation = Joi.object({
   secondDueDb: Joi.required(),
   totalScoreDb: Joi.number().required(),
   totalQuestionDb: Joi.number(),
-  quiz: Joi.array().items({
-    name_question: Joi.number(),
-    question_type: Joi.string(),
-    question_content: Joi.string().required(),
-    point_question: Joi.number().positive().required(),
-    alternatives: Joi.array(),
-  }),
+  quiz: Joi.array()
+    .required()
+    .items({
+      name_question: Joi.number(),
+      question_type: Joi.string(),
+      question_content: Joi.string().max(700).required(),
+      point_question: Joi.number().positive().required(),
+      alternatives: Joi.array(),
+    }),
 
   results: Joi.array(),
 });
