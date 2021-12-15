@@ -30,10 +30,10 @@ const questionValidation = Joi.object({
     question_type: Joi.string(),
     question_content: Joi.string().required(),
     point_question: Joi.number().positive().required(),
-    alternatives: Joi.required(),
+    alternatives: Joi.array(),
   }),
 
-  results: Joi.required(),
+  results: Joi.array(),
 });
 
 module.exports.registerValidation = registerValidation;
