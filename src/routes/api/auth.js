@@ -12,7 +12,6 @@ const { json } = require('express');
 router.post('/register', async (req, res) => {
   // Validation the data before
   const { error } = registerValidation.validate(req.body);
-  console.log(req.body);
   if (error)
     return res.json({
       sucess: false,

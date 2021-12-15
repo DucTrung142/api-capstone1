@@ -15,6 +15,7 @@ const loginValidation = Joi.object({
 });
 const questionValidation = Joi.object({
   id_exam: Joi.required(),
+  exam_date_db: Joi.date().min('now').required(),
   exam_topic_db: Joi.required(),
   hourOpenDb: Joi.required(),
   minuteOpenDb: Joi.required(),
@@ -22,9 +23,16 @@ const questionValidation = Joi.object({
   hourDueDb: Joi.required(),
   minuteDueDb: Joi.required(),
   secondDueDb: Joi.required(),
-  totalScoreDb: Joi.required(),
+  totalScoreDb: Joi.number().required(),
   totalQuestionDb: Joi.number(),
-  quiz: Joi.required(),
+  quiz: Joi.array().items({
+    name_question: Joi.number(),
+    question_type: Joi.string(),
+    question_content: Joi.string().required(),
+    point_question: Joi.number().positive().required(),
+    alternatives: Joi.required(),
+  }),
+
   results: Joi.required(),
 });
 

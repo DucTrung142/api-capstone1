@@ -13,6 +13,7 @@ const QuestionSchema = new Schema({
   },
   exam_date_db: {
     type: Date,
+    required: true,
   },
   exam_topic_db: {
     type: String,

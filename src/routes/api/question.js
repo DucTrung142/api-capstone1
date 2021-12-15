@@ -137,6 +137,30 @@ router.post(
   verifyToken,
   authenticateRole(['Admin', 'Teacher']),
   async (req, res) => {
+    const { error } = questionValidation.validate(req.body);
+    if (error)
+      return res.json({
+        success: false,
+        message: error.details[0].message,
+      });
+    const hourOpenDb = req.body.hourOpenDb;
+    const hourDueDb = req.body.hourDueDb;
+    const minuteOpenDb = req.body.minuteOpenDb;
+    const minuteDueDb = req.body.minuteDueDb;
+    if (hourDueDb < hourOpenDb)
+      return res.json({
+        success: false,
+        message: 'The submission time must be longer than the assignment time',
+      });
+    if (hourDueDb === hourOpenDb) {
+      if (minuteDueDb <= minuteOpenDb)
+        return res.json({
+          success: false,
+          message:
+            'The submission time must be longer than the assignment time',
+        });
+    }
+
     const newQuestion = new Question({
       id_user: req.user.id,
       id_exam: req.body.id_exam,
@@ -164,8 +188,7 @@ router.post(
       });
     } catch (error) {
       res.json({
-        success: false,
-        message: 'Can not be empty',
+        error: error,
       });
     }
   }
