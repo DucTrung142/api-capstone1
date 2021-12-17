@@ -54,6 +54,7 @@ const QuestionSchema = new Schema({
       },
       question_type: {
         type: String,
+        required: true,
       },
       question_content: {
         type: String,
