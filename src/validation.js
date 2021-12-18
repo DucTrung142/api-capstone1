@@ -43,6 +43,7 @@ const questionValidation = Joi.object({
   exam_date_db: Joi.date().min('now').required().messages({
     'date.min': `Exam date must not be less than current date`,
     'any.required': ` You need to enter the exam date`,
+    'date.base': `You need to enter the exam date`,
   }),
   exam_topic_db: Joi.required().messages({
     'any.required': ` You need to enter the exam topics`,
