@@ -143,6 +143,12 @@ router.post(
         success: false,
         message: error.details[0].message,
       });
+    const examExist = await Question.findOne({ id_exam: req.body.id_exam });
+    if (examExist)
+      return res.json({
+        sucess: false,
+        message: 'id exam already exists',
+      });
     const hourOpenDb = req.body.hourOpenDb;
     const hourDueDb = req.body.hourDueDb;
     const minuteOpenDb = req.body.minuteOpenDb;
@@ -150,14 +156,13 @@ router.post(
     if (hourDueDb < hourOpenDb)
       return res.json({
         success: false,
-        message: 'The submission time must be longer than the assignment time',
+        message: 'Invalid exam time',
       });
     if (hourDueDb === hourOpenDb) {
       if (minuteDueDb <= minuteOpenDb)
         return res.json({
           success: false,
-          message:
-            'The submission time must be longer than the assignment time',
+          message: 'Invalid exam yime',
         });
     }
 

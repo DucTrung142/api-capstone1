@@ -48,8 +48,8 @@ const questionValidation = Joi.object({
     'string.empty': ` You need to enter id exam`,
   }),
   exam_date_db: Joi.date().min('now').required().messages({
-    'date.min': `Exam date must not be less than current date`,
-    'date.empty': ` You need to enter the exam date`,
+    'date.min': `Invalid exam date`,
+    'any.empty': ` You need to enter the exam date`,
     'date.base': `You need to enter the correct date format`,
   }),
   exam_topic_db: Joi.string().required().messages({
@@ -75,7 +75,6 @@ const questionValidation = Joi.object({
   }),
   totalScoreDb: Joi.number().required().messages({
     'number.base': `You need to enter the correct number format total score`,
-    'number.empty': ` You need to enter the exam total score`,
   }),
   quiz: Joi.array()
     .required()
