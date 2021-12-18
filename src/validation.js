@@ -30,7 +30,6 @@ const registerValidation = Joi.object({
   user_type: Joi.string().required().messages({
     'string.empty': ` You need to enter the user_type`,
   }),
-  avatarUrl: Joi.string(),
 });
 const loginValidation = Joi.object({
   username: Joi.string().min(6).max(30).required().messages({
