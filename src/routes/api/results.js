@@ -121,14 +121,14 @@ router.get(
   verifyToken,
   authenticateRole(['Admin', 'Teacher']),
   async (req, res) => {
+    const examExist = await Result.findOne({ id_exam: req.params.id_exam });
+    console.log(examExist);
+    if (!examExist)
+      return res.json({
+        sucess: false,
+        message: 'id exam already exists',
+      });
     try {
-      const examExist = await Result.findOne({ id_exam: req.params.id_exam });
-      console.log(examExist);
-      if (!examExist)
-        return res.json({
-          sucess: false,
-          message: 'id exam already exists',
-        });
       const id_exam = req.params.id_exam;
 
       let scoreResult = await Result.aggregate([
