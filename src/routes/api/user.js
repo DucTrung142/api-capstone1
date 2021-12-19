@@ -4,7 +4,7 @@ const verifyToken = require('../../middleware/verifyToken');
 const User = require('../../app//model/users');
 const bcrypt = require('bcrypt');
 const authenticateRole = require('../../middleware/authenUser');
-const { registerValidation } = require('../../validation');
+const { patchValidation } = require('../../validation');
 
 //UPDATE ACCOUNT
 router.patch('/:userId', verifyToken, async (req, res) => {
@@ -17,7 +17,7 @@ router.patch('/:userId', verifyToken, async (req, res) => {
 
     req.body.password = hashPassword;
   }
-  const { error } = registerValidation.validate(req.body);
+  const { error } = patchValidation.validate(req.body);
   if (error)
     return res.json({
       success: false,

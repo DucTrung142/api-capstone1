@@ -36,6 +36,37 @@ const registerValidation = Joi.object({
     'string.empty': `Need to enter enough information`,
   }),
 });
+const patchValidation = Joi.object({
+  fullname: Joi.string().min(6).max(30).required().messages({
+    'string.empty': `Need to enter enough information`,
+    'string.max': `Fullname Characters whose length exceeds 30`,
+    'string.min': `Fullname characters less than 6`,
+    'any.required': `Need to enter enough information`,
+  }),
+  username: Joi.string().min(6).max(30).required().messages({
+    'string.empty': `Need to enter enough information`,
+    'string.max': `Username Characters whose length exceeds 30`,
+    'string.min': `Username characters less than 6`,
+    'any.required': `Need to enter enough information`,
+  }),
+  phone: Joi.string()
+    .required()
+    .min(9)
+    .max(11)
+    .pattern(new RegExp('^[0-9]'))
+    .messages({
+      'string.empty': `Need to enter enough information`,
+      'string.max': `Phone characters whose length exceeds 9`,
+      'string.min': `phone characters less than 11`,
+    }),
+  birthday: Joi.date().min('1-1-1800').max('now').messages({
+    'date.max': `Invalid birth date`,
+  }),
+  user_type: Joi.string().required().messages({
+    'string.empty': `Need to enter enough information`,
+  }),
+  avatarUrl: Joi.string().allow(''),
+});
 const loginValidation = Joi.object({
   username: Joi.string().min(6).max(30).required().messages({
     'string.empty': `Need to enter enough information`,
@@ -118,3 +149,4 @@ const questionValidation = Joi.object({
 module.exports.registerValidation = registerValidation;
 module.exports.loginValidation = loginValidation;
 module.exports.questionValidation = questionValidation;
+module.exports.patchValidation = patchValidation;
