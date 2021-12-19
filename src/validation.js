@@ -65,7 +65,7 @@ const patchValidation = Joi.object({
   user_type: Joi.string().required().messages({
     'string.empty': `Need to enter enough information`,
   }),
-  avatarUrl: Joi.string().empty('').default('default value'),
+  // avatarUrl: Joi.string().empty('').default('default value'),
 });
 const loginValidation = Joi.object({
   username: Joi.string().min(6).max(30).required().messages({
