@@ -123,11 +123,11 @@ router.get(
   async (req, res) => {
     const examExist = await Result.findOne({ id_exam: req.params.id_exam });
     console.log(examExist);
-    // if (!examExist)
-    //   return res.json({
-    //     success: false,
-    //     message: 'id exam already exists',
-    //   });
+    if (!examExist)
+      return res.json({
+        success: false,
+        message: 'id exam already exists',
+      });
     try {
       const id_exam = req.params.id_exam;
 
