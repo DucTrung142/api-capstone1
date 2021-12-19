@@ -146,7 +146,7 @@ router.post(
     const examExist = await Question.findOne({ id_exam: req.body.id_exam });
     if (examExist)
       return res.json({
-        sucess: false,
+        success: false,
         message: 'id exam already exists',
       });
     const hourOpenDb = req.body.hourOpenDb;
