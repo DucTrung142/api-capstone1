@@ -125,7 +125,7 @@ router.get(
     console.log(examExist);
     if (!examExist)
       return res.json({
-        sucess: false,
+        success: false,
         message: 'id exam already exists',
       });
     try {
