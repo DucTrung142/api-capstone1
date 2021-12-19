@@ -123,24 +123,29 @@ const questionValidation = Joi.object({
   }),
   quiz: Joi.array()
     .required()
-    .items({
-      name_question: Joi.number(),
-      question_type: Joi.string().required().messages({
-        'string.empty': ` Need to enter enough information`,
-        'any.required': `Need to enter enough information`,
-      }),
-      question_content: Joi.string().max(700).required().messages({
-        'string.empty': `Need to enter enough information`,
-        'string.max': `Characters whose length exceeds 700`,
-        'any.required': `Need to enter enough information`,
-      }),
-      point_question: Joi.number().positive().required().messages({
-        'number.empty': ` Need to enter enough information`,
-        'number.positive': `Question score must be greater than 0`,
-        'number.base': `You need to enter the correct number format point question`,
-        'any.required': `Need to enter enough information`,
-      }),
-      alternatives: Joi.array(),
+    .items(
+      Joi.object({
+        name_question: Joi.number(),
+        question_type: Joi.string().required().messages({
+          'string.empty': ` Need to enter enough information`,
+          'any.required': `Need to enter enough information`,
+        }),
+        question_content: Joi.string().max(700).required().messages({
+          'string.empty': `Need to enter enough information`,
+          'string.max': `Characters whose length exceeds 700`,
+          'any.required': `Need to enter enough information`,
+        }),
+        point_question: Joi.number().positive().required().messages({
+          'number.empty': ` Need to enter enough information`,
+          'number.positive': `Question score must be greater than 0`,
+          'number.base': `You need to enter the correct number format point question`,
+          'any.required': `Need to enter enough information`,
+        }),
+        alternatives: Joi.array(),
+      }).required()
+    )
+    .messages({
+      'array.includesRequiredUnknowns': `Need to enter enough information`,
     }),
 
   results: Joi.array(),
