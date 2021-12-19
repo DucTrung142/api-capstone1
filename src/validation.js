@@ -26,7 +26,9 @@ const registerValidation = Joi.object({
       'string.max': `Phone characters whose length exceeds 9`,
       'string.min': `phone characters less than 11`,
     }),
-  birthday: Joi.date().min('1-1-1800').max('12-31-2021'),
+  birthday: Joi.date().min('1-1-1800').max('now').messages({
+    'date.max': `Invalid birth date`,
+  }),
   user_type: Joi.string().required().messages({
     'string.empty': `Need to enter enough information`,
   }),
@@ -49,7 +51,7 @@ const questionValidation = Joi.object({
   }),
   exam_date_db: Joi.date().min('now').required().messages({
     'date.min': `Invalid exam date`,
-    'date.base': `re-enter the date`,
+    'date.base': `Invalid the date`,
   }),
   exam_topic_db: Joi.string().required().messages({
     'string.empty': `Need to enter enough information`,

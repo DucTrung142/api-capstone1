@@ -162,7 +162,7 @@ router.post(
       if (minuteDueDb <= minuteOpenDb)
         return res.json({
           success: false,
-          message: 'Invalid exam yime',
+          message: 'Invalid exam time',
         });
     }
 
