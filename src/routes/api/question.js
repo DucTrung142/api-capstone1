@@ -147,7 +147,7 @@ router.post(
     if (examExist)
       return res.json({
         success: false,
-        message: 'id exam already exists',
+        message: 'Exam ID already exists',
       });
     const hourOpenDb = req.body.hourOpenDb;
     const hourDueDb = req.body.hourDueDb;
