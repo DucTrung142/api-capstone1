@@ -17,12 +17,12 @@ router.patch('/:userId', verifyToken, async (req, res) => {
 
     req.body.password = hashPassword;
   }
-  const { error } = patchValidation.validate(req.body);
-  if (error)
-    return res.json({
-      success: false,
-      message: error.details[0].message,
-    });
+  // const { error } = patchValidation.validate(req.body);
+  // if (error)
+  //   return res.json({
+  //     success: false,
+  //     message: error.details[0].message,
+  //   });
 
   const updatedUser = await User.findByIdAndUpdate(userId, req.body, {
     new: true,
