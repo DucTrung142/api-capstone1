@@ -84,10 +84,11 @@ const questionValidation = Joi.object({
     'string.empty': `Need to enter enough information`,
     'any.required': `Need to enter enough information`,
   }),
-  exam_date_db: Joi.date().min('now').required().messages({
+  exam_date_db: Joi.date().required().messages({
     'date.min': `Invalid exam date`,
     'date.base': `Invalid the date`,
     'any.required': `Need to enter enough information`,
+    // .min('now')
   }),
   exam_topic_db: Joi.string().required().messages({
     'string.empty': `Need to enter enough information`,
