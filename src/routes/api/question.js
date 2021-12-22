@@ -165,7 +165,6 @@ router.post(
           message: 'Invalid exam time',
         });
     }
-
     const newQuestion = new Question({
       id_user: req.user.id,
       id_exam: req.body.id_exam,

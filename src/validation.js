@@ -7,11 +7,12 @@ const registerValidation = Joi.object({
     'string.min': `Fullname characters less than 6`,
     'any.required': `Need to enter enough information`,
   }),
-  username: Joi.string().min(6).max(30).required().messages({
+  username: Joi.string().alphanum().min(6).max(30).required().messages({
     'string.empty': `Need to enter enough information`,
     'string.max': `Username Characters whose length exceeds 30`,
     'string.min': `Username characters less than 6`,
     'any.required': `Need to enter enough information`,
+    'string.alphanum': `This username is Invalid`,
   }),
   password: Joi.string().min(6).max(30).required().messages({
     'string.empty': `Need to enter enough information`,
@@ -88,7 +89,7 @@ const questionValidation = Joi.object({
     'date.min': `Invalid exam date`,
     'date.base': `Invalid the date`,
     'any.required': `Need to enter enough information`,
-    // .min('now')
+    // .min('2021-12-21')
   }),
   exam_topic_db: Joi.string().required().messages({
     'string.empty': `Need to enter enough information`,
