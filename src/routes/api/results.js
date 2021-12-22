@@ -174,11 +174,23 @@ router.patch('/one-exam/:id_exam/:id_user', async (req, res) => {
     );
 
     let { quiz, total_score, old_point } = req.body;
+    let flag = true;
+    for (const iterator of quiz) {
+      if (
+        iterator.essay_score < 0 ||
+        iterator.essay_score > iterator.point_question
+      )
+        flag = false;
+    }
+    if (flag === false)
+      return res.json({
+        success: false,
+        message: 'Invalid essay score',
+      });
     for (const iterator of quiz) {
       if (iterator.essay_score >= 0) old_point += iterator.essay_score;
     }
     total_score = old_point;
-    console.log(total_score);
     const updateResult = await Result.findOneAndUpdate(
       {
         id_exam: id_exam,
