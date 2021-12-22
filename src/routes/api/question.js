@@ -9,6 +9,7 @@ const Question = require('../../app/model/question');
 const Users = require('../../app/model/users');
 const Results = require('../../app/model/results');
 const results = require('../../app/model/results');
+const { date } = require('joi');
 //get all quiz questions
 router.get(
   '/question',
@@ -165,6 +166,8 @@ router.post(
           message: 'Invalid exam time',
         });
     }
+    const d = new Date();
+    // console.log(d.now());
     const newQuestion = new Question({
       id_user: req.user.id,
       id_exam: req.body.id_exam,
