@@ -167,7 +167,31 @@ router.post(
         });
     }
     const d = new Date();
-    // console.log(d.now());
+    let hournow = d.getHours();
+    let minutenow = d.getMinutes();
+    let dateexam = req.body.exam_date_db;
+    let dayexam = +dateexam.slice(-2);
+    let monthexam = +dateexam.substr(5, 2);
+    let yearexam = +dateexam.substr(0, 4);
+    let daynow = d.getDate();
+    let monthnow = d.getMonth() + 1;
+    let yearnow = d.getFullYear();
+
+    if (dayexam === daynow && monthexam === monthnow && yearexam === yearnow) {
+      if (hournow > hourOpenDb)
+        return res.json({
+          success: false,
+          message: 'Invalid exam time',
+        });
+      if (hournow === +hourOpenDb) {
+        if (minutenow >= +minuteOpenDb)
+          return res.json({
+            success: false,
+            message: 'Invalid exam time',
+          });
+      }
+    }
+
     const newQuestion = new Question({
       id_user: req.user.id,
       id_exam: req.body.id_exam,
