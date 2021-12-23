@@ -24,15 +24,11 @@ router.post(
           for (element of quiz) {
             var boolean = false;
             for (alternative of element.alternatives) {
-              if (alternative.answer_correct) {
-                if (
-                  alternative.answer_correct !== alternative?.answer_choosen
-                ) {
-                  boolean = false;
-                  break;
-                } else {
-                  boolean = true;
-                }
+              if (alternative.answer_correct !== alternative?.answer_choosen) {
+                boolean = false;
+                break;
+              } else {
+                boolean = true;
               }
             }
             total_score += boolean ? parseFloat(element.point_question) : 0;
