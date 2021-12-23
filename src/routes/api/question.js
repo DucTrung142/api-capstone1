@@ -177,14 +177,6 @@ router.post(
     let monthnow = d.getMonth() + 1;
     let yearnow = d.getFullYear();
 
-    console.log(hournow);
-    console.log(minutenow);
-    console.log(dayexam);
-    console.log(daynow);
-    console.log(monthexam);
-    console.log(monthnow);
-    console.log(yearexam);
-    console.log(yearnow);
     if (dayexam === daynow && monthexam === monthnow && yearexam === yearnow) {
       if (hournow > hourOpenDb)
         return res.json({
