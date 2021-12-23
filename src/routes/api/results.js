@@ -25,7 +25,7 @@ router.post(
             var boolean = false;
             for (alternative of element.alternatives) {
               if (alternative.answer_correct) {
-                if (alternative.answer_correct === alternative?.answer_choosen)
+                if (alternative.answer_correct === alternative.answer_choosen)
                   boolean = true;
                 else {
                   boolean = false;
