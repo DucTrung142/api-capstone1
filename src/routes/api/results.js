@@ -198,7 +198,7 @@ router.patch('/one-exam/:id_exam/:id_user', async (req, res) => {
       },
       { new: true }
     );
-    res.json(updateResult);
+    res.json({ success: true, message: 'Update success', updateResult });
   } catch (error) {
     console.log(error.toString());
     return res.status(400).json({ error: error.toString() });
